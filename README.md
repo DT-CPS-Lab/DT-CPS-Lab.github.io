@@ -33,3 +33,10 @@ Pages: `index.html` (About), `people.html`, `projects.html`, `publications.html`
   and prefer lowercase paths (e.g. `logo/`, `media/`).
 - Large media (banner PNGs, the project MP4) should be compressed before committing to
   keep the site fast — target images under ~400 KB where practical.
+
+## License / Copyright
+
+© 2026 Digital Transformation & Cyberphysical Systems Lab, University of Central Florida —
+Dr. Minas Pantelidakis. **All rights reserved.** This is proprietary code: no copying,
+modification, distribution, or reuse without prior written permission. See [`LICENSE`](LICENSE).
+The repository is public only to enable free GitHub Pages hosting — it is not open source.
