@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DT&amp;CPS Lab — UCF | About</title>
+  <meta name="description" content="Digital Transformation &amp; Cyberphysical Systems Laboratory at the University of Central Florida. Led by Dr. Minas Pantelidakis, advancing digital twins, IoT, AI, and cyberphysical systems across manufacturing, distributed systems, and agriculture." />
+  <link rel="icon" href="logo/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root { --font-heading: 'Orbitron', 'Rajdhani', sans-serif; }
+
+    .nav.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse 130% 80% at 60% 50%, #0e0a00 0%, #000 65%);
+    }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-content { position: relative; z-index: 2; max-width: 760px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+    .hero-eyebrow span { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .hero h1 { font-family: var(--font-heading); color: var(--white); margin-bottom: 0.75rem; font-size: clamp(1.8rem, 4.5vw, 3rem); letter-spacing: 0.06em; line-height: 1.15; }
+    .hero h1 .accent { color: var(--gold); }
+    .hero-tagline { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--gray-mid); margin-bottom: 0.75rem; font-style: italic; }
+    .hero-affil { font-family: var(--font-mono); font-size: 0.78rem; color: var(--gray-text); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2rem; }
+    .hero-typed-row { font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--gray-text); margin-bottom: 2.5rem; min-height: 1.8rem; }
+    .hero-typed-row span { color: var(--gold); font-weight: 600; }
+    .hero-typed-row .cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--gold); margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    /* Hero centered layout */
+    .hero-centered { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem; }
+    .hero-centered .hero-content { max-width: 760px; display: flex; flex-direction: column; align-items: center; }
+    .hero-centered .hero-actions { justify-content: center; }
+    .hero-logo-block { display: flex; flex-direction: column; align-items: center; z-index: 2; position: relative; }
+    .hero-logo-v4 {
+      width: 300px;
+      height: auto;
+      border-radius: 8px;
+      opacity: 0;
+      animation: logo-appear 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+      filter: drop-shadow(0 0 30px rgba(255,201,4,0.15)) drop-shadow(0 8px 30px rgba(0,0,0,0.6));
+    }
+    @keyframes logo-appear {
+      0%   { opacity: 0; transform: scale(0.88) translateY(14px); }
+      100% { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    /* Animated lab title below logo */
+    .hero-lab-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fade-in-title 1.5s ease 1.8s forwards;
+    }
+    @keyframes fade-in-title {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll hint */
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; animation: float 2.5s ease-in-out infinite; }
+    .scroll-hint span { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gray-text); text-transform: uppercase; }
+    .scroll-hint i { color: var(--gold); font-size: 0.9rem; }
+
+    /* ── Mission ── */
+    .mission-text { max-width: 760px; font-size: 1.05rem; color: var(--gray-mid); line-height: 1.85; margin-bottom: 0; }
+
+    /* ── Research Pillars ── */
+    .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .pillar-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.1);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,201,4,0.04), transparent 70%); pointer-events: none; }
+    .pillar-card:hover { border-color: rgba(255,201,4,0.35); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4), var(--shadow-gold); }
+    .pillar-num { font-family: var(--font-heading); font-size: 2rem; color: rgba(255,201,4,0.15); line-height: 1; margin-bottom: 0.5rem; }
+    .pillar-icon { font-size: 1.75rem; color: var(--gold); margin-bottom: 0.75rem; }
+    .pillar-card h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.6rem; }
+    .pillar-card p { font-size: 0.875rem; }
+    .pillar-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
+
+    /* ── Why This Lab ── */
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .why-card { display: flex; gap: 1.25rem; align-items: flex-start; background: var(--dark2); border: 1px solid rgba(255,201,4,0.07); border-radius: var(--radius); padding: 1.75rem; transition: var(--transition); }
+    .why-card:hover { border-color: rgba(255,201,4,0.2); }
+    .why-icon { width: 52px; height: 52px; background: rgba(255,201,4,0.08); border: 1px solid rgba(255,201,4,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--gold); flex-shrink: 0; }
+    .why-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 0.4rem; }
+    .why-card p { font-size: 0.875rem; }
+
+    /* ── News ticker ── */
+    .news-section { padding: 2rem 0; background: var(--dark2); border-top: 1px solid rgba(255,201,4,0.08); border-bottom: 1px solid rgba(255,201,4,0.08); overflow: hidden; }
+    .news-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; display: inline-block; padding: 0.2rem 0.75rem; background: rgba(255,201,4,0.08); border: 1px solid rgba(255,201,4,0.2); border-radius: 2px; margin-right: 1rem; white-space: nowrap; flex-shrink: 0; }
+    .news-ticker { display: flex; align-items: center; gap: 0; overflow: hidden; position: relative; }
+    .news-label { position: relative; z-index: 2; background: var(--dark2); padding-right: 1rem; }
+    .news-scroll { display: flex; gap: 2.5rem; animation: ticker 28s linear infinite; white-space: nowrap; mask-image: linear-gradient(to right, transparent, #000 2rem); -webkit-mask-image: linear-gradient(to right, transparent, #000 2rem); }
+    .news-item { font-size: 0.88rem; color: var(--gray-mid); display: flex; align-items: center; gap: 0.5rem; }
+    .news-item i { color: var(--gold); font-size: 0.75rem; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── CTA ── */
+    .cta-section { text-align: center; padding: 5rem 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, #120d00 0%, #000 100%); }
+    .cta-section h2 { margin-bottom: 1rem; }
+    .cta-section p { margin: 0 auto 2rem; max-width: 520px; }
+    .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+
+    @media (max-width: 768px) { .hero-lab-title { font-size: clamp(0.9rem, 4vw, 1.2rem); } }
+    @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="container">
+    <a class="nav-logo" href="index.html" aria-label="DT&CPS Lab home">
+      <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+      <div class="nav-logo-text">
+        <span>DT&amp;CPS Lab</span>
+        <span>University of Central Florida</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">About</a>
+      <a href="people.html">People</a>
+      <a href="projects.html">Projects</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="about">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container hero-centered">
+    <!-- Centered logo + title -->
+    <div class="hero-logo-block">
+      <img src="logo/v4_transparent.png" alt="DT&amp;CPS Lab Logo" class="hero-logo-v4" />
+      <h1 class="hero-lab-title anim-typewriter">
+        Digital Transformation &amp; Cyberphysical Systems Laboratory
+      </h1>
+    </div>
+
+    <div class="hero-content anim-fade-up">
+      <!-- <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span>UCF · Industrial Engineering &amp; Management Systems</span>
+      </div> -->
+      <p class="hero-tagline">Bridging the Physical and Digital Worlds</p>
+      <p class="hero-affil">Department of Industrial Engineering and Management Systems &nbsp;·&nbsp; University of Central Florida</p>
+      <p class="hero-typed-row">
+        Research in&nbsp;<span><span id="typed-text"></span><span class="cursor"></span></span>
+      </p>
+      <div class="hero-actions">
+        <a href="projects.html" class="btn btn-primary"><i class="fa-solid fa-flask-vial"></i> Explore Projects</a>
+        <a href="people.html" class="btn btn-outline"><i class="fa-solid fa-users"></i> Meet the Team</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-handshake"></i> Collaborate</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Scroll</span><i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ═══ NEWS TICKER ═══ -->
+<!-- <div class="news-section">
+  <div class="container">
+    <div class="news-ticker">
+      <div class="news-scroll">
+        <span class="news-item"><i class="fa-solid fa-newspaper"></i> Paper published in Journal of Manufacturing Systems (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-newspaper"></i> Paper published in Manufacturing Letters — Distributed AM (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-trophy"></i> PI awarded Graduate School Grant, Gerondelis Foundation (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-graduation-cap"></i> PI completes PhD, Auburn University (2025)</span>
+        <span class="news-item"><i class="fa-solid fa-university"></i> DT&CPS Lab established at UCF IEMS</span> -->
+        <!-- duplicate for seamless loop -->
+        <!-- <span class="news-item"><i class="fa-solid fa-newspaper"></i> Paper published in Journal of Manufacturing Systems (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-newspaper"></i> Paper published in Manufacturing Letters — Distributed AM (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-trophy"></i> PI awarded Graduate School Grant, Gerondelis Foundation (2024)</span>
+        <span class="news-item"><i class="fa-solid fa-graduation-cap"></i> PI completes PhD, Auburn University (2025)</span>
+        <span class="news-item"><i class="fa-solid fa-university"></i> DT&CPS Lab established at UCF IEMS</span>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- ═══ MISSION ═══ -->
+<section class="section" id="mission" aria-labelledby="mission-title">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="mission-title">Our <span class="gold">Mission</span></h2>
+      <div class="divider"></div>
+      <p class="mission-text">
+        The Digital Transformation &amp; Cyberphysical Systems (DT&amp;CPS) Lab is a research hub dedicated to advancing the science and engineering of digital transformation across domains where cyberphysical integration creates transformative opportunities. Rooted in industrial engineering, our work encompasses any system where bridging the physical and digital worlds unlocks new capabilities. Our core competencies span <strong style="color:var(--white)">Digital Twins, Modeling &amp; Simulation, Internet of Things, Extended Reality, and Artificial Intelligence</strong> — applied wherever they can make the greatest impact.
+      </p>
+    </div>
+
+    <!-- Research Pillars
+    <div class="pillar-grid" aria-label="Research pillars">
+
+      <div class="pillar-card" data-reveal data-delay="80">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon"><i class="fa-solid fa-industry"></i></div>
+        <h3>Digital Manufacturing</h3>
+        <p>High-fidelity digital twins of manufacturing processes, smart factory architectures, Industry 4.0 integration, CNC simulation, and real-time process optimization using GPU-accelerated and IoT-enabled frameworks.</p>
+        <div class="pillar-tags">
+          <span class="tag tag-gold">Digital Twins</span>
+          <span class="tag tag-gold">Smart Factories</span>
+          <span class="tag tag-gray">Industry 4.0</span>
+          <span class="tag tag-gray">CNC</span>
+        </div>
+      </div>
+
+      <div class="pillar-card" data-reveal data-delay="160">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon"><i class="fa-solid fa-network-wired"></i></div>
+        <h3>Distributed Manufacturing</h3>
+        <p>Decentralized production networks enabling additive and subtractive manufacturing across geographically distributed facilities, supply chain digitization, and cloud-based manufacturing orchestration.</p>
+        <div class="pillar-tags">
+          <span class="tag tag-gold">Decentralized</span>
+          <span class="tag tag-gold">Additive Mfg</span>
+          <span class="tag tag-gray">Supply Chain</span>
+          <span class="tag tag-gray">Cloud</span>
+        </div>
+      </div>
+
+      <div class="pillar-card" data-reveal data-delay="240">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon"><i class="fa-solid fa-seedling"></i></div>
+        <h3>Digital Agriculture</h3>
+        <p>Precision agriculture and agricultural cyberphysical systems — sensor-driven crop monitoring, AI-powered plant health assessment, digital twins for agricultural processes, and smart irrigation management.</p>
+        <div class="pillar-tags">
+          <span class="tag tag-gold">Precision Ag</span>
+          <span class="tag tag-gold">CNN / AI</span>
+          <span class="tag tag-gray">IoT Sensors</span>
+          <span class="tag tag-gray">Irrigation</span>
+        </div>
+      </div>
+
+    </div> -->
+  </div>
+</section>
+
+<!-- ═══ WHY THIS LAB ═══ -->
+<section class="section section--dark" aria-labelledby="why-title">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="why-title">What Sets Us <span class="gold">Apart</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="why-grid">
+
+      <div class="why-card" data-reveal data-delay="60">
+        <div class="why-icon"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4>Cross-Domain Digital Transformation</h4>
+          <p>We apply digital twin and cyberphysical systems principles across manufacturing, distributed systems, agriculture, and beyond — wherever bridging physical and digital worlds creates value.</p>
+        </div>
+      </div>
+
+      <div class="why-card" data-reveal data-delay="120">
+        <div class="why-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div>
+          <h4>Cyberphysical Systems Expertise</h4>
+          <p>Deep technical depth in IoT, edge computing, real-time simulation, extended reality, and AI — enabling end-to-end cyberphysical integration from sensor to insight.</p>
+        </div>
+      </div>
+
+      <div class="why-card" data-reveal data-delay="180">
+        <div class="why-icon"><i class="fa-solid fa-handshake"></i></div>
+        <div>
+          <h4>Industry–Academia Collaboration</h4>
+          <p>Through the Knights Digital Twin Initiative, we partner with industry to co-develop, validate, and deploy research in real operational environments — ensuring impact beyond the lab.</p>
+        </div>
+      </div>
+
+      <div class="why-card" data-reveal data-delay="240">
+        <div class="why-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div>
+          <h4>Data-Driven, Human-Centered Research</h4>
+          <p>Our methods combine rigorous data science and AI with a focus on human factors — designing intelligent systems that augment human decision-making rather than replace it.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <div class="container">
+    <div data-reveal>
+      <h2 style="color:var(--white);">Let's <span class="gold"> Connect</span></h2> 
+      <p>Explore our projects and publications, or reach out to discuss collaboration opportunities with the DT&amp;CPS Lab.</p>
+      <div class="cta-actions">
+        <a href="projects.html" class="btn btn-primary"><i class="fa-solid fa-diagram-project"></i> View Projects</a>
+        <a href="publications.html" class="btn btn-outline"><i class="fa-solid fa-book-open"></i> Publications</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="display:inline-flex;margin-bottom:0.75rem;">
+          <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+          <div class="nav-logo-text">
+            <span>DT&amp;CPS Lab</span>
+            <span>University of Central Florida</span>
+          </div>
+        </a>
+        <p>Digital Transformation &amp; Cyberphysical Systems Laboratory — Dept. of Industrial Engineering and Management Systems, UCF.</p>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;transition:var(--transition);" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;transition:var(--transition);" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;transition:var(--transition);" title="UCF IEMS"><i class="fa-solid fa-building-columns"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></li>
+          <li><a href="https://www.cecs.ucf.edu/faculty/minas-pantelidakis/" target="_blank" rel="noopener">UCF Faculty Profile</a></li>
+          <li><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">UCF IEMS Department</a></li>
+          <li><span style="color:var(--gray-text);font-size:0.85rem;">Eng 2, Rm 314 · Orlando, FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Transformation &amp; Cyberphysical Systems Lab, University of Central Florida. All rights reserved.</p>
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray-text);">UCF · IEMS · DR. MINAS PANTELIDAKIS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Override typed-text strings for this page
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('typed-text');
+    if (el) {
+      // clear the default and rerun
+      const texts = ['Digital Twins','Internet of Things', 'Edge Computing', 'Modeling & Simulation', 'Artificial Intelligence', 'Advanced Digitalization', 'Digital Manufacturing', 'Digital Agriculture', 'Extended Reality'];
+      let ti = 0, ci = 0, del = false;
+      function tick() {
+        const full = texts[ti];
+        el.textContent = del ? full.slice(0, ci--) : full.slice(0, ci++);
+        let delay = del ? 40 : 80;
+        if (!del && ci > full.length) { del = true; delay = 2200; }
+        else if (del && ci < 0)       { del = false; ti = (ti+1) % texts.length; ci = 0; delay = 400; }
+        setTimeout(tick, delay);
+      }
+      tick();
+    }
+  });
+</script>
+</body>
+</html>

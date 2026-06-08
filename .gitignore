@@ -1,0 +1,10 @@
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# Internal working docs — not part of the published site
+LabInfo.md
+Lab_Website_Requirements.md

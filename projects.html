@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — DT&amp;CPS Lab UCF</title>
+  <meta name="description" content="Research projects at the UCF Digital Transformation &amp; Cyberphysical Systems Laboratory: digital manufacturing, distributed manufacturing, and digital agriculture." />
+  <link rel="icon" href="logo/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .nav.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* Filter bar */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .filter-btn {
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn:hover { border-color: rgba(255,201,4,0.4); color: var(--gold); }
+    .filter-btn.active { background: rgba(255,201,4,0.1); border-color: var(--gold); color: var(--gold); }
+
+    /* Projects grid */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+    .project-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.08);
+      border-radius: 8px;
+      padding: 0;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-banner { width: 100%; height: 180px; object-fit: cover; display: block; border-bottom: 1px solid rgba(255,201,4,0.08); }
+    .project-card-body { padding: 1.5rem 2rem 2rem; display: flex; flex-direction: column; flex: 1; }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .project-card:hover { border-color: rgba(255,201,4,0.3); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4), var(--shadow-gold); }
+    .project-card:hover::before { opacity: 1; }
+    .project-card.hidden { display: none; }
+
+    .project-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .project-icon { width: 52px; height: 52px; background: rgba(255,201,4,0.07); border: 1px solid rgba(255,201,4,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--gold); flex-shrink: 0; }
+    .project-status { font-size: 0.68rem; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; white-space: nowrap; }
+    .status-ongoing { background: rgba(0,200,100,0.08); color: #00c864; border: 1px solid rgba(0,200,100,0.25); }
+    .status-completed { background: rgba(255,201,4,0.08); color: var(--gold); border: 1px solid rgba(255,201,4,0.25); }
+
+    .project-title { color: var(--white); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.65rem; }
+    .project-desc { font-size: 0.875rem; color: var(--gray-text); line-height: 1.75; margin-bottom: 1.25rem; flex: 1; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+    .project-pillar { font-size: 0.72rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+    .pillar-dm  { color: #4db8ff; }
+    .pillar-dist { color: #b48aff; }
+    .pillar-da  { color: #4dff9c; }
+
+    /* Funding row */
+    .project-funding { display: flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; color: var(--gray-text); font-family: var(--font-mono); margin-top: 0.5rem; }
+    .project-funding i { color: var(--gold); font-size: 0.7rem; }
+
+    @media (max-width: 800px) { .projects-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+      <div class="nav-logo-text">
+        <span>DT&amp;CPS Lab</span>
+        <span>University of Central Florida</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="people.html">People</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="circuit-bg" aria-hidden="true"></div>
+  <div class="container page-hero-content">
+    <!-- <div class="section-label">Projects</div> -->
+    <h1>Research <span>Projects</span></h1>
+    <div class="divider"></div>
+    <p style="color:var(--gray-mid);max-width:640px;font-size:1rem;">
+      Our research spans the intersection of digital transformation and cyberphysical systems across multiple application domains.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section class="section" aria-labelledby="projects-heading">
+  <div class="container">
+    <div data-reveal>
+      <!-- <div class="section-label">All Projects</div> -->
+      <h2 class="section-title" id="projects-heading">Active &amp; Completed <span class="gold">Research</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar" role="group" aria-label="Filter projects by pillar" data-reveal data-delay="80">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="dm">
+        <i class="fa-solid fa-industry" style="margin-right:0.3rem;font-size:0.7rem;"></i> Digital Manufacturing
+      </button>
+      <button class="filter-btn" data-filter="dist">
+        <i class="fa-solid fa-network-wired" style="margin-right:0.3rem;font-size:0.7rem;"></i> Distributed Manufacturing
+      </button>
+      <button class="filter-btn" data-filter="da">
+        <i class="fa-solid fa-seedling" style="margin-right:0.3rem;font-size:0.7rem;"></i> Digital Agriculture
+      </button>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- 1 -->
+      <div class="project-card" data-pillar="dm" data-reveal data-delay="60">
+        <img src="media/projects_media/DTE/DTE_banner.png" alt="Digital Twin Ecosystem banner" class="project-banner" />
+        <div class="project-card-body">
+          <div class="project-card-top">
+            <span class="project-status status-ongoing">Ongoing</span>
+          </div>
+          <div class="project-title">Digital Twin Ecosystem for Computer Numberical Control Manufacturing Processes</div>
+          <div class="project-desc">
+            Development of a generic, real-time Digital Twin Ecosystem (DTE) for both additive and subtractive manufacturing processes. Integrates IoT sensors, edge computing, and game-engine visualization (Unity 3D) to create synchronized physical-digital representations enabling real-time monitoring, anomaly detection, and predictive control of manufacturing operations. Based on the PI's dissertation research.
+          </div>
+          <div class="project-footer">
+            <span class="project-pillar pillar-dm"><i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:0.3rem;"></i>Digital Manufacturing</span>
+            <div style="display:flex;gap:0.4rem;">
+              <span class="tag tag-gold">Digital Twins</span>
+              <span class="tag tag-gray">IoT</span>
+              <span class="tag tag-gray">Unity 3D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="project-card" data-pillar="dist" data-reveal data-delay="120">
+        <img src="media/projects_media/Distrubuted_Manufacturing/distributed_manufacturing_banner.png" alt="Distributed Manufacturing banner" class="project-banner" />
+        <div class="project-card-body">
+          <div class="project-card-top">
+            <span class="project-status status-ongoing">Ongoing</span>
+          </div>
+          <div class="project-title">Distributed Manufacturing System for Additive Manufacturing</div>
+          <div class="project-desc">
+            Design and implementation of a decentralized production system enabling additive manufacturing (FDM) processes across geographically distributed networked facilities. Focuses on orchestration architectures, resource allocation, supply chain digitization, and cloud-based coordination for scalable, resilient AM production networks.
+          </div>
+          <div class="project-footer">
+            <span class="project-pillar pillar-dist"><i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:0.3rem;"></i>Distributed Manufacturing</span>
+            <div style="display:flex;gap:0.4rem;">
+              <span class="tag tag-gold">Additive Mfg</span>
+              <span class="tag tag-gray">Decentralized</span>
+              <span class="tag tag-gray">Blockchain</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="project-card" data-pillar="da" data-reveal data-delay="180">
+        <img src="media/projects_media/CIWA/CIWA_banner.png" alt="CIWA banner" class="project-banner" />
+        <div class="project-card-body">
+          <div class="project-card-top">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-title">CNN-Based Crop Water Stress Index Measurement</div>
+          <div class="project-desc">
+            An expert system leveraging convolutional neural networks (CNNs) for automated sunlit-leaf identification in field conditions, enabling accurate measurement of the Crop Water Stress Index (CWSI) in pistachio and tomato plants. Developed in partnership with the Center of Irrigation Technology (CIT) at California State University, Fresno, with funding from the California Department of Food &amp; Agriculture (CDFA).
+          </div>
+          <div class="project-footer">
+            <span class="project-pillar pillar-da"><i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:0.3rem;"></i>Digital Agriculture</span>
+            <div style="display:flex;gap:0.4rem;">
+              <span class="tag tag-gold">CNN / AI</span>
+              <span class="tag tag-gray">Precision Ag</span>
+              <span class="tag tag-gray">Irrigation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="project-card" data-pillar="dm" data-reveal data-delay="240">
+        <img src="media/projects_media/IoT/IoT_banner.png" alt="IoT Condition Monitoring banner" class="project-banner" />
+        <div class="project-card-body">
+          <div class="project-card-top">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-title">IoT-Enabled Condition Monitoring for Overall Equipment Effectiveness</div>
+          <div class="project-desc">
+            Real-time condition monitoring system for manufacturing processes combining IoT sensor networks, edge computing, and extended reality (XR) interfaces. Enables continuous measurement and visualization of Overall Equipment Effectiveness (OEE) metrics, supporting data-driven decision-making for process optimization and maintenance scheduling.
+          </div>
+          <div class="project-footer">
+            <span class="project-pillar pillar-dm"><i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:0.3rem;"></i>Digital Manufacturing</span>
+            <div style="display:flex;gap:0.4rem;">
+              <span class="tag tag-gold">IoT</span>
+              <span class="tag tag-gold">Extended Reality</span>
+              <span class="tag tag-gray">OEE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <!-- <div class="project-card" data-pillar="dm" data-reveal data-delay="300">
+        <img src="media/projects_media/CyberphysicalSecurity/CyberphysicalSecurity_banner.png" alt="Cyberphysical Security banner" class="project-banner" />
+        <div class="project-card-body">
+          <div class="project-card-top">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-title">Cyber-Physical Security for Manufacturing via Digital Twins</div>
+          <div class="project-desc">
+            Leveraging the Digital Twin Ecosystem framework to identify, model, and mitigate cyber-physical security vulnerabilities in smart manufacturing environments. The digital twin acts as a real-time security monitor and testbed for evaluating attack scenarios and defensive countermeasures without disrupting physical production systems.
+          </div>
+          <div class="project-footer">
+            <span class="project-pillar pillar-dm"><i class="fa-solid fa-circle" style="font-size:0.5rem;margin-right:0.3rem;"></i>Digital Manufacturing</span>
+            <div style="display:flex;gap:0.4rem;">
+              <span class="tag tag-gold">Cybersecurity</span>
+              <span class="tag tag-gold">Digital Twins</span>
+              <span class="tag tag-gray">CPS Security</span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:4rem 0;background:var(--dark2);border-top:1px solid rgba(255,201,4,0.08);">
+  <div class="container" style="text-align:center;">
+    <div data-reveal>
+      <h2 style="color:var(--white);margin-bottom:0.75rem;">Interested in <span class="gold">Collaborating?</span></h2>
+      <p style="max-width:500px;margin:0 auto 1.5rem;">We actively seek industry and academic partners to collaborate on these and future research initiatives.</p>
+      <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+        <a href="publications.html" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> See Publications</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-handshake"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="display:inline-flex;margin-bottom:0.75rem;">
+          <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+          <div class="nav-logo-text">
+            <span>DT&amp;CPS Lab</span>
+            <span>University of Central Florida</span>
+          </div>
+        </a>
+        <p>Digital Transformation &amp; Cyberphysical Systems Laboratory — Dept. of Industrial Engineering and Management Systems, UCF.</p>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="UCF IEMS"><i class="fa-solid fa-building-columns"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></li>
+          <li><a href="https://www.cecs.ucf.edu/faculty/minas-pantelidakis/" target="_blank" rel="noopener">UCF Faculty Profile</a></li>
+          <li><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">UCF IEMS Department</a></li>
+          <li><span style="color:var(--gray-text);font-size:0.85rem;">Eng 2, Rm 314 · Orlando, FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Transformation &amp; Cyberphysical Systems Lab, University of Central Florida. All rights reserved.</p>
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray-text);">UCF · IEMS · DR. MINAS PANTELIDAKIS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  /* Project filter */
+  document.addEventListener('DOMContentLoaded', () => {
+    const btns  = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          const match = f === 'all' || c.dataset.pillar === f;
+          c.classList.toggle('hidden', !match);
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>

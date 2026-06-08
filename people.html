@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People — DT&amp;CPS Lab UCF</title>
+  <meta name="description" content="Meet Dr. Minas Pantelidakis and the PhD research team at the UCF Digital Transformation &amp; Cyberphysical Systems Laboratory." />
+  <link rel="icon" href="logo/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .nav.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* ── PI Card ── */
+    .pi-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.15);
+      border-radius: 8px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+    }
+    .pi-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+    .pi-photo-col { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pi-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 6px;
+      border: 2px solid rgba(255,201,4,0.3);
+      display: block;
+    }
+    .pi-contact-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .pi-contact-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.78rem; color: var(--gray-text); font-family: var(--font-mono); line-height: 1.4; }
+    .pi-contact-item i { color: var(--gold); width: 14px; flex-shrink: 0; margin-top: 0.1rem; }
+    .pi-contact-item a { color: var(--gray-text); transition: var(--transition); }
+    .pi-contact-item a:hover { color: var(--gold); }
+
+    .pi-info h2 { color: var(--white); font-size: clamp(1.4rem, 2.5vw, 1.9rem); margin-bottom: 0.2rem; }
+    .pi-title { color: var(--gold); font-size: 0.88rem; font-family: var(--font-mono); letter-spacing: 0.07em; margin-bottom: 0.2rem; }
+    .pi-dept { color: var(--gray-text); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .pi-bio p { font-size: 0.92rem; color: var(--gray-mid); line-height: 1.8; margin-bottom: 0.9rem; }
+
+    /* Education */
+    .pi-edu { margin: 1.5rem 0; }
+    .pi-edu-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-family: var(--font-mono); margin-bottom: 0.75rem; }
+    .edu-item { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.65rem; }
+    .edu-icon { width: 28px; height: 28px; background: rgba(255,201,4,0.08); border: 1px solid rgba(255,201,4,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--gold); flex-shrink: 0; margin-top: 0.15rem; }
+    .edu-text { font-size: 0.85rem; color: var(--gray-mid); line-height: 1.5; }
+    .edu-text strong { color: var(--white); font-size: 0.88rem; }
+
+    /* Awards */
+    .awards-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.25rem 0; }
+    .award-badge { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; background: rgba(255,201,4,0.06); border: 1px solid rgba(255,201,4,0.2); border-radius: 3px; padding: 0.3rem 0.7rem; color: var(--gray-mid); }
+    .award-badge i { color: var(--gold); font-size: 0.7rem; }
+    .award-badge strong { color: var(--white); font-size: 0.75rem; }
+
+    /* Research interests */
+    .pi-interests { margin: 1rem 0; }
+    .pi-interests-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-family: var(--font-mono); margin-bottom: 0.6rem; }
+
+    /* Profile links */
+    .pi-links { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.5rem; }
+    .pi-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-family: var(--font-mono); color: var(--gray-text); border: 1px solid rgba(255,255,255,0.08); padding: 0.35rem 0.75rem; border-radius: var(--radius); transition: var(--transition); }
+    .pi-link:hover { color: var(--gold); border-color: rgba(255,201,4,0.3); background: rgba(255,201,4,0.06); }
+    .pi-link i { font-size: 0.9rem; color: var(--gold); }
+
+    /* ── PhD Students ── */
+    .students-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .student-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .student-card:hover { border-color: rgba(255,201,4,0.3); transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.4), var(--shadow-gold); }
+    .student-header {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.75rem 1.75rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .student-photo {
+      width: 90px; height: 90px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 6px;
+      border: 2px solid rgba(255,201,4,0.25);
+      flex-shrink: 0;
+      display: block;
+    }
+    .student-header-info { flex: 1; }
+    .student-name { color: var(--white); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .student-role { font-size: 0.75rem; color: var(--gold); font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .student-body { padding: 1.25rem 1.75rem 1.75rem; }
+    .student-bio { font-size: 0.875rem; color: var(--gray-mid); line-height: 1.75; margin-bottom: 1rem; }
+    .student-interests-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-family: var(--font-mono); margin-bottom: 0.5rem; }
+    .student-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+    /* ── Join Us callout ── */
+    .join-callout {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.1);
+      border-radius: 8px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .join-callout i { font-size: 2.5rem; color: var(--gold); flex-shrink: 0; }
+    .join-callout h3 { color: var(--white); margin-bottom: 0.5rem; }
+    .join-callout p { font-size: 0.9rem; margin-bottom: 1rem; }
+
+    @media (max-width: 960px) {
+      .pi-card { grid-template-columns: 1fr; }
+      .pi-photo { width: 160px; height: 160px; }
+      .students-grid { grid-template-columns: 1fr; }
+      .join-callout { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+      <div class="nav-logo-text">
+        <span>DT&amp;CPS Lab</span>
+        <span>University of Central Florida</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="people.html" class="active">People</a>
+      <a href="projects.html">Projects</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="circuit-bg" aria-hidden="true"></div>
+  <div class="container page-hero-content">
+    <!-- <div class="section-label">People</div> -->
+    <h1>Our <span>Team</span></h1>
+    <div class="divider"></div>
+    <p style="color:var(--gray-mid);max-width:600px;font-size:1rem;">
+      An interdisciplinary team bridging industrial engineering, computer science, and cyberphysical systems at the University of Central Florida.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ PRINCIPAL INVESTIGATOR ═══ -->
+<section class="section" aria-labelledby="pi-heading">
+  <div class="container">
+    <div data-reveal>
+      <!-- <div class="section-label">Principal Investigator</div> -->
+      <h2 class="section-title" id="pi-heading">Principal <span class="gold">Investigator</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="pi-card" data-reveal data-delay="80">
+      <!-- Left: photo + contact -->
+      <div class="pi-photo-col">
+        <img src="media/MinasPantelidakis.png" alt="Dr. Minas Pantelidakis" class="pi-photo" loading="lazy" />
+        <div class="pi-contact-list">
+          <div class="pi-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></div>
+          <div class="pi-contact-item"><i class="fa-solid fa-location-dot"></i><span>Eng 2, Room 432, UCF</span></div>
+          <!-- <div class="pi-contact-item"><i class="fa-solid fa-phone"></i><span>407-823-2204</span></div> -->
+          <div class="pi-contact-item"><i class="fa-brands fa-linkedin"></i><a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener">LinkedIn Profile</a></div>
+          <div class="pi-contact-item"><i class="fa-brands fa-google"></i><a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+        </div>
+      </div>
+
+      <!-- Right: bio -->
+      <div class="pi-info">
+        <h2>Dr. Minas Pantelidakis</h2>
+        <div class="pi-title">Assistant Professor &nbsp;·&nbsp; Knights Digital Twin Initiative</div>
+        <div class="pi-dept">Department of Industrial Engineering and Management Systems &nbsp;·&nbsp; University of Central Florida</div>
+
+        <div class="pi-bio">
+          <p>Dr. Minas Pantelidakis is an Assistant Professor in the Department of Industrial Engineering and Management Systems (IEMS) at the College of Engineering and Computer Science (CECS) at the University of Central Florida (UCF), and Director of the Digital Transformation and Cyber-Physical Systems (DT&amp;CPS) Laboratory. He is dedicated to advancing the field of Digital Twins through cutting-edge research, interdisciplinary collaboration, and education. His research interests center on Digital Twins, Advanced Manufacturing, Modeling &amp; Simulation, the Internet of Things, and Artificial Intelligence.</p>
+          <p>Dr. Pantelidakis holds a Ph.D. (2025) and an M.S. (2024) in Industrial and Systems Engineering from Auburn University, as well as an M.Eng. in Electrical and Computer Engineering from the Technical University of Crete (2021). His academic accomplishments have been recognized with the JT Black Lean Engineering Student of the Year award (2023) and the Walt and Virginia Woltosz Fellowship (2021–2025).</p>
+          <p>During his doctoral studies, Dr. Pantelidakis was a researcher at the Interdisciplinary Center for Advanced Manufacturing Systems (ICAMS) at Auburn University, where he led innovative research exploring the integration of Digital Twins into manufacturing, supported by funding from the Department of Defense (DoD), the National Institute of Standards and Technology (NIST), and various industry collaborators. Additionally, during his undergraduate studies, he led a precision irrigation initiative in partnership with the Center of Irrigation Technology (CIT) at California State University, Fresno, with funding from the California Department of Food &amp; Agriculture (CDFA). His scholarly contributions include publications in prestigious journals such as the <em>Journal of Manufacturing Systems</em>, the <em>International Journal of Advanced Manufacturing Technology</em>, the <em>International Journal of Lean Six Sigma</em>, and <em>Expert Systems with Applications</em>.</p>
+        </div>
+
+        <!-- Research Interests -->
+        <div class="pi-interests">
+          <div class="pi-interests-label">Research Interests</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span class="tag tag-gold">Digital Twins</span>
+            <span class="tag tag-gold">Modeling &amp; Simulation</span>
+            <span class="tag tag-gold">Internet of Things</span>
+            <span class="tag tag-gold">Extended Reality</span>
+            <span class="tag tag-gold">Artificial Intelligence</span>
+            <span class="tag tag-gray">Advanced Manufacturing</span>
+            <span class="tag tag-gray">Industry 4.0</span>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="pi-edu">
+          <div class="pi-edu-label">Education</div>
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="edu-text">
+              <strong>Ph.D. in Industrial &amp; Systems Engineering</strong> — Auburn University (2025)
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="edu-text">
+              <strong>M.S. in Industrial &amp; Systems Engineering</strong> — Auburn University (2024)
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="edu-text">
+              <strong>M.Eng. in Electrical &amp; Computer Engineering</strong> — Technical University of Crete (2021)
+            </div>
+          </div>
+        </div>
+
+        <!-- Awards -->
+        <!-- <div class="pi-edu-label" style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);font-family:var(--font-mono);margin-bottom:0.6rem;">Awards &amp; Honors</div>
+        <div class="awards-row">
+          <div class="award-badge"><i class="fa-solid fa-trophy"></i><span><strong>2024</strong> &nbsp;Graduate School Grant, Gerondelis Foundation</span></div>
+          <div class="award-badge"><i class="fa-solid fa-award"></i><span><strong>2023</strong> &nbsp;JT Black Lean Engineering Student of the Year, Auburn University</span></div>
+          <div class="award-badge"><i class="fa-solid fa-medal"></i><span><strong>2021</strong> &nbsp;Walt &amp; Virginia Woltosz Fellowship, Auburn University</span></div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHD STUDENTS ═══ -->
+<section class="section section--dark" aria-labelledby="students-heading">
+  <div class="container">
+    <div data-reveal>
+      <!-- <div class="section-label">Graduate Researchers</div> -->
+      <h2 class="section-title" id="students-heading">Graduate <span class="gold">Students</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="students-grid">
+
+      <!-- Varvara Vythoulka -->
+      <div class="student-card" data-reveal data-delay="80">
+        <div class="student-header">
+          <img src="media/VarvaraVythoulka.png" alt="Varvara Vythoulka" class="student-photo" loading="lazy" />
+          <div class="student-header-info">
+            <div class="student-name">Varvara Vythoulka</div>
+            <div class="student-role">PhD Student</div>
+            <div style="font-size:0.78rem;color:var(--gray-text);font-family:var(--font-mono);">IEMS · UCF</div>
+          </div>
+        </div>
+        <div class="student-body">
+          <p class="student-bio">
+            Varvara Vythoulka is a Ph.D. student in the Department of Industrial Engineering and Management Systems at the University of Central Florida. She holds an Integrated Master's degree (B.Sc. &amp; M.Eng.) in Computer Engineering and Informatics from the University of Patras, Greece, where her thesis focused on blockchain-based security for IoT data management. She has prior research experience at the Cybersecurity Research Group at Delft University of Technology (Netherlands) and has co-authored work on smart contracts for smart water distribution networks, and distributed manufacturing. Her research interests include cybersecurity, IoT security, blockchain technologies, and AI-driven systems.
+          </p>
+          <div class="student-interests-label">Research Interests</div>
+          <div class="student-tags">
+            <span class="tag tag-gold">Cybersecurity</span>
+            <span class="tag tag-gold">IoT Security</span>
+            <span class="tag tag-gold">Blockchain</span>
+            <span class="tag tag-gold">Explainable AI</span>
+            <span class="tag tag-gray">Distributed Manufacturing</span>
+            <span class="tag tag-gray">Computer Graphics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konstantinos Lazaridis -->
+      <div class="student-card" data-reveal data-delay="160">
+        <div class="student-header">
+          <img src="media/KonstantinosLazaridis.png" alt="Konstantinos Lazaridis" class="student-photo" loading="lazy" />
+          <div class="student-header-info">
+            <div class="student-name">Konstantinos Lazaridis</div>
+            <div class="student-role">PhD Student</div>
+            <div style="font-size:0.78rem;color:var(--gray-text);font-family:var(--font-mono);">IEMS · UCF</div>
+          </div>
+        </div>
+        <div class="student-body">
+          <p class="student-bio">
+            Konstantinos Lazaridis is a Ph.D. student in the Department of Industrial Engineering and Management Systems at the University of Central Florida. He holds an M.Eng. in Electrical and Computer Engineering from the Technical University of Crete, Greece, where his thesis involved developing an advanced multi-functional CNC machine integrating additive and subtractive manufacturing processes. He brings extensive hands-on experience in CNC machining, 3D printing, embedded systems, and mechatronic prototyping. His research interests include digital manufacturing, process optimization, additive and subtractive manufacturing, and the Internet of Things.
+          </p>
+          <div class="student-interests-label">Research Interests</div>
+          <div class="student-tags">
+            <span class="tag tag-gold">Digital Manufacturing</span>
+            <span class="tag tag-gold">CNC Machining</span>
+            <span class="tag tag-gold">Additive Mfg</span>
+            <span class="tag tag-gray">Embedded Systems</span>
+            <span class="tag tag-gray">Mechatronics</span>
+            <span class="tag tag-gray">IoT</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ JOIN US ═══ -->
+<section class="section" aria-label="Join the lab">
+  <div class="container">
+    <div class="join-callout" data-reveal>
+      <i class="fa-solid fa-user-plus"></i>
+      <div>
+        <h3>Interested in Joining the DT&amp;CPS Lab?</h3>
+        <p>We are always looking for motivated PhD students and researchers. If you are interested in digital transformation, cyberphysical systems, digital manufacturing, or related areas, please reach out — we would love to hear from you.</p>
+        <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="display:inline-flex;margin-bottom:0.75rem;">
+          <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+          <div class="nav-logo-text">
+            <span>DT&amp;CPS Lab</span>
+            <span>University of Central Florida</span>
+          </div>
+        </a>
+        <p>Digital Transformation &amp; Cyberphysical Systems Laboratory — Dept. of Industrial Engineering and Management Systems, UCF.</p>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="UCF IEMS"><i class="fa-solid fa-building-columns"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></li>
+          <li><a href="https://www.cecs.ucf.edu/faculty/minas-pantelidakis/" target="_blank" rel="noopener">UCF Faculty Profile</a></li>
+          <li><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">UCF IEMS Department</a></li>
+          <li><span style="color:var(--gray-text);font-size:0.85rem;">Eng 2, Rm 314 · Orlando, FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Transformation &amp; Cyberphysical Systems Lab, University of Central Florida. All rights reserved.</p>
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray-text);">UCF · IEMS · DR. MINAS PANTELIDAKIS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

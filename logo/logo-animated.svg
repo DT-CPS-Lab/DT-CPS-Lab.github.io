@@ -1,0 +1,322 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 215" width="200" height="215" role="img" aria-label="DT&amp;CPS Lab Logo">
+  <defs>
+    <!-- Glow filter for strokes/shapes -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Stronger glow for text / power-on moment -->
+    <filter id="glow-strong" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Soft glow for flame -->
+    <filter id="glow-flame" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Radial gradient for core glow fill -->
+    <radialGradient id="core-fill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFC904" stop-opacity="0.25"/>
+      <stop offset="70%"  stop-color="#FFC904" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FFC904" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Idle ambient glow -->
+    <radialGradient id="ambient-glow" cx="50%" cy="55%" r="50%">
+      <stop offset="0%"   stop-color="#FFC904" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FFC904" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       PHASE 1 — TRACE  (starts at 0.2s)
+       Hex outer frame draws along its perimeter.
+       Circuit dots pop at each vertex.
+       Side traces extend left and right.
+    ───────────────────────────────────────────── */
+
+    .hex-frame {
+      stroke-dasharray: 432;
+      stroke-dashoffset: 432;
+      animation: trace-hex 1.3s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+    }
+    @keyframes trace-hex {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* Vertex dots staggered through the trace */
+    .v-dot { opacity: 0; }
+    .v0 { animation: dot-in 0.18s ease-out 0.28s forwards; }
+    .v1 { animation: dot-in 0.18s ease-out 0.50s forwards; }
+    .v2 { animation: dot-in 0.18s ease-out 0.72s forwards; }
+    .v3 { animation: dot-in 0.18s ease-out 0.94s forwards; }
+    .v4 { animation: dot-in 0.18s ease-out 1.16s forwards; }
+    .v5 { animation: dot-in 0.18s ease-out 1.38s forwards; }
+    @keyframes dot-in { to { opacity: 1; } }
+
+    /* Side circuit traces */
+    .trace-h {
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+    }
+    .trace-hl { animation: trace-line 0.35s ease-out 1.0s forwards; }
+    .trace-hr { animation: trace-line 0.35s ease-out 1.05s forwards; }
+    .trace-v {
+      stroke-dasharray: 25;
+      stroke-dashoffset: 25;
+    }
+    .trace-vl { animation: trace-line 0.28s ease-out 1.32s forwards; }
+    .trace-vr { animation: trace-line 0.28s ease-out 1.32s forwards; }
+    .trace-branch {
+      stroke-dasharray: 12;
+      stroke-dashoffset: 12;
+    }
+    .trace-bl { animation: trace-line 0.2s ease-out 1.58s forwards; }
+    .trace-br { animation: trace-line 0.2s ease-out 1.58s forwards; }
+    @keyframes trace-line { to { stroke-dashoffset: 0; } }
+
+    .end-dot { opacity: 0; }
+    .end-dot-l { animation: dot-in 0.15s ease-out 1.6s forwards; }
+    .end-dot-r { animation: dot-in 0.15s ease-out 1.6s forwards; }
+
+    /* ─────────────────────────────────────────────
+       PHASE 2 — ASSEMBLE  (starts at 1.5s)
+       Dark gear background fills in.
+       Outer gear ring traces around.
+       12 teeth click into place, staggered.
+       Inner ring traces.
+    ───────────────────────────────────────────── */
+
+    .gear-bg {
+      opacity: 0;
+      animation: fade-in-el 0.3s ease-out 1.5s forwards;
+    }
+
+    .gear-outer {
+      stroke-dasharray: 352;
+      stroke-dashoffset: 352;
+      animation: trace-line 0.65s ease-out 1.55s forwards;
+    }
+    .gear-inner {
+      stroke-dasharray: 264;
+      stroke-dashoffset: 264;
+      animation: trace-line 0.5s ease-out 2.0s forwards;
+    }
+
+    /* 12 gear teeth — staggered opacity */
+    .tooth { opacity: 0; }
+    .t0  { animation: tooth-in 0.12s ease-out 1.60s forwards; }
+    .t1  { animation: tooth-in 0.12s ease-out 1.67s forwards; }
+    .t2  { animation: tooth-in 0.12s ease-out 1.74s forwards; }
+    .t3  { animation: tooth-in 0.12s ease-out 1.81s forwards; }
+    .t4  { animation: tooth-in 0.12s ease-out 1.88s forwards; }
+    .t5  { animation: tooth-in 0.12s ease-out 1.95s forwards; }
+    .t6  { animation: tooth-in 0.12s ease-out 2.02s forwards; }
+    .t7  { animation: tooth-in 0.12s ease-out 2.09s forwards; }
+    .t8  { animation: tooth-in 0.12s ease-out 2.16s forwards; }
+    .t9  { animation: tooth-in 0.12s ease-out 2.23s forwards; }
+    .t10 { animation: tooth-in 0.12s ease-out 2.30s forwards; }
+    .t11 { animation: tooth-in 0.12s ease-out 2.37s forwards; }
+    @keyframes tooth-in {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1);   }
+    }
+
+    @keyframes fade-in-el { to { opacity: 1; } }
+
+    /* ─────────────────────────────────────────────
+       PHASE 3 — POWER ON  (starts at 2.5s)
+       Core glow floods in then settles.
+       Flame blazes on at top.
+       "DT&" and "CPS" text lights up.
+       Brief full-brightness flash then idle pulse.
+    ───────────────────────────────────────────── */
+
+    .core-glow {
+      opacity: 0;
+      animation: power-glow 1.0s ease-out 2.5s forwards;
+    }
+    @keyframes power-glow {
+      0%   { opacity: 0; }
+      40%  { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .flame-group {
+      opacity: 0;
+      transform: translateY(6px) scale(0.85);
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: flame-on 0.55s cubic-bezier(0.2,0,0.4,1.4) 2.55s forwards;
+    }
+    @keyframes flame-on {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .text-dt {
+      opacity: 0;
+      animation: text-power 0.4s ease-out 2.65s forwards;
+    }
+    .text-cps {
+      opacity: 0;
+      animation: text-power 0.4s ease-out 2.78s forwards;
+    }
+    @keyframes text-power {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Flash pulse at moment of power-on */
+    .power-flash {
+      opacity: 0;
+      animation: flash 0.4s ease-out 2.6s forwards;
+    }
+    @keyframes flash {
+      0%   { opacity: 0; }
+      30%  { opacity: 0.6; }
+      100% { opacity: 0; }
+    }
+
+    /* Continuous idle glow after animation completes */
+    .idle-pulse {
+      opacity: 0;
+      animation: idle 3.5s ease-in-out 3.4s infinite;
+    }
+    @keyframes idle {
+      0%, 100% { opacity: 0.08; }
+      50%       { opacity: 0.22; }
+    }
+  </style>
+
+  <!-- ─── Idle ambient glow (background, runs after power-on) ─── -->
+  <ellipse class="idle-pulse" cx="100" cy="120" rx="85" ry="75"
+           fill="url(#ambient-glow)"/>
+
+  <!-- ══════════════════════════════════════════════
+       PHASE 1 — TRACE
+       Hex: "100,48 162,84 162,156 100,192 38,156 38,84"
+       Circumradius 72, center (100,120), point-top
+  ══════════════════════════════════════════════ -->
+
+  <!-- Hex outer frame -->
+  <polygon class="hex-frame"
+    points="100,48 162,84 162,156 100,192 38,156 38,84"
+    fill="none"
+    stroke="#FFC904" stroke-width="1.5"
+    filter="url(#glow)"/>
+
+  <!-- Vertex dots -->
+  <circle class="v-dot v0" cx="100" cy="48"  r="3.5" fill="#FFC904" filter="url(#glow)"/>
+  <circle class="v-dot v1" cx="162" cy="84"  r="3.5" fill="#FFC904" filter="url(#glow)"/>
+  <circle class="v-dot v2" cx="162" cy="156" r="3.5" fill="#FFC904" filter="url(#glow)"/>
+  <circle class="v-dot v3" cx="100" cy="192" r="3.5" fill="#FFC904" filter="url(#glow)"/>
+  <circle class="v-dot v4" cx="38"  cy="156" r="3.5" fill="#FFC904" filter="url(#glow)"/>
+  <circle class="v-dot v5" cx="38"  cy="84"  r="3.5" fill="#FFC904" filter="url(#glow)"/>
+
+  <!-- Left circuit trace  (from hex vertex 38,120 outward) -->
+  <line class="trace-h trace-hl" x1="38" y1="120" x2="8" y2="120"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <line class="trace-v trace-vl" x1="8" y1="120" x2="8" y2="145"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <line class="trace-branch trace-bl" x1="8" y1="145" x2="20" y2="145"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <circle class="end-dot end-dot-l" cx="8" cy="145" r="2.5" fill="#FFC904"/>
+
+  <!-- Right circuit trace -->
+  <line class="trace-h trace-hr" x1="162" y1="120" x2="192" y2="120"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <line class="trace-v trace-vr" x1="192" y1="120" x2="192" y2="145"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <line class="trace-branch trace-br" x1="192" y1="145" x2="180" y2="145"
+        stroke="#FFC904" stroke-width="1" stroke-linecap="round"/>
+  <circle class="end-dot end-dot-r" cx="192" cy="145" r="2.5" fill="#FFC904"/>
+
+  <!-- ══════════════════════════════════════════════
+       PHASE 2 — ASSEMBLE
+       Gear centered at (100, 120)
+       Outer ring r=56, teeth r=56→70, inner r=42
+  ══════════════════════════════════════════════ -->
+
+  <g transform="translate(100,120)">
+    <!-- Dark gear background fill -->
+    <circle class="gear-bg" r="56" fill="#0a0a0a"/>
+
+    <!-- Outer gear ring trace (circumference ≈ 352) -->
+    <circle class="gear-outer"
+      r="56" fill="none"
+      stroke="#FFC904" stroke-width="2"
+      filter="url(#glow)"/>
+
+    <!-- 12 Gear teeth — each is a rect from y=−70 (tip) to y=−56 (base),
+         centered at x=0, rotated i×30° around gear center (0,0).
+         CSS transform-box on the g tag keeps rotation clean. -->
+    <g fill="#FFC904" filter="url(#glow)">
+      <g class="tooth t0"  style="transform:rotate(0deg)">  <rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t1"  style="transform:rotate(30deg)"> <rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t2"  style="transform:rotate(60deg)"> <rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t3"  style="transform:rotate(90deg)"> <rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t4"  style="transform:rotate(120deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t5"  style="transform:rotate(150deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t6"  style="transform:rotate(180deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t7"  style="transform:rotate(210deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t8"  style="transform:rotate(240deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t9"  style="transform:rotate(270deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t10" style="transform:rotate(300deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+      <g class="tooth t11" style="transform:rotate(330deg)"><rect x="-5" y="-70" width="10" height="14" rx="1.5"/></g>
+    </g>
+
+    <!-- Inner ring -->
+    <circle class="gear-inner"
+      r="42" fill="none"
+      stroke="#FFC904" stroke-width="1.5"
+      filter="url(#glow)"/>
+
+    <!-- ══════════════════════════════════════════
+         PHASE 3 — POWER ON
+    ═══════════════════════════════════════════ -->
+
+    <!-- Core glow fill -->
+    <circle class="core-glow" r="38" fill="url(#core-fill)"/>
+
+    <!-- Flash burst at power-on -->
+    <circle class="power-flash" r="50" fill="none"
+      stroke="#FFC904" stroke-width="3" filter="url(#glow-strong)"/>
+
+    <!-- "DT&" text -->
+    <text class="text-dt"
+      x="0" y="-5"
+      font-family="'Orbitron','Share Tech Mono','Courier New',monospace"
+      font-size="16" font-weight="900" letter-spacing="1"
+      fill="#FFFFFF" text-anchor="middle"
+      filter="url(#glow-strong)">DT&amp;</text>
+
+    <!-- "CPS" text -->
+    <text class="text-cps"
+      x="0" y="16"
+      font-family="'Orbitron','Share Tech Mono','Courier New',monospace"
+      font-size="16" font-weight="900" letter-spacing="1"
+      fill="#FFFFFF" text-anchor="middle"
+      filter="url(#glow-strong)">CPS</text>
+  </g>
+
+  <!-- ══════════════════════════════════════════════
+       FLAME / KNIGHT — at top vertex (100, 48)
+       Blazes on during Phase 3
+  ══════════════════════════════════════════════ -->
+  <g class="flame-group">
+    <!-- Outer flame shape -->
+    <path d="M100,14 C90,20 84,30 88,40 C84,46 90,54 96,52 C94,56 97,60 100,58 C103,60 106,56 104,52 C110,54 116,46 112,40 C116,30 110,20 100,14 Z"
+      fill="#FFC904" filter="url(#glow-flame)" opacity="0.95"/>
+    <!-- Inner highlight -->
+    <path d="M100,22 C95,27 93,34 96,40 C94,44 97,48 100,47 C103,48 106,44 104,40 C107,34 105,27 100,22 Z"
+      fill="#FFE566" opacity="0.7"/>
+    <!-- Crescent / circuit board decoration at flame base -->
+    <line x1="90" y1="55" x2="110" y2="55"
+          stroke="#FFC904" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="90"  cy="55" r="2" fill="#FFC904" opacity="0.8"/>
+    <circle cx="110" cy="55" r="2" fill="#FFC904" opacity="0.8"/>
+    <!-- Small connecting node in the middle -->
+    <circle cx="100" cy="55" r="1.5" fill="#FFC904" opacity="0.6"/>
+  </g>
+</svg>

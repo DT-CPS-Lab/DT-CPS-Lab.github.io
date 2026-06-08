@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — DT&amp;CPS Lab UCF</title>
+  <meta name="description" content="Contact the UCF Digital Transformation &amp; Cyberphysical Systems Laboratory. Reach Dr. Minas Pantelidakis for research collaborations, industry partnerships, or general inquiries." />
+  <link rel="icon" href="logo/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .nav.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* ── Opportunities ── */
+    .opp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .opp-card { background: var(--dark2); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); padding: 1.75rem; text-align: center; transition: var(--transition); }
+    .opp-card:hover { border-color: rgba(255,201,4,0.3); transform: translateY(-3px); }
+    .opp-card i { font-size: 2rem; color: var(--gold); margin-bottom: 0.75rem; }
+    .opp-card h4 { color: var(--white); margin-bottom: 0.5rem; font-size: 1rem; }
+    .opp-card p { font-size: 0.875rem; }
+
+    /* ── Contact layout ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+
+    /* Info panel */
+    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+    .info-item { background: var(--dark2); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); padding: 1.4rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: var(--transition); }
+    .info-item:hover { border-color: rgba(255,201,4,0.2); }
+    .info-icon { width: 44px; height: 44px; background: rgba(255,201,4,0.07); border: 1px solid rgba(255,201,4,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gold); flex-shrink: 0; }
+    .info-label { font-size: 0.7rem; font-family: var(--font-mono); color: var(--gray-text); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .info-value { color: var(--white); font-size: 0.92rem; font-weight: 600; }
+    .info-value a { color: var(--white); transition: var(--transition); }
+    .info-value a:hover { color: var(--gold); }
+    .info-sub { font-size: 0.8rem; color: var(--gray-text); margin-top: 0.2rem; line-height: 1.5; }
+
+    /* Social links */
+    .social-row { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.5rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-family: var(--font-mono); color: var(--gray-text); border: 1px solid rgba(255,255,255,0.08); padding: 0.4rem 0.85rem; border-radius: var(--radius); transition: var(--transition); }
+    .social-btn:hover { color: var(--gold); border-color: rgba(255,201,4,0.3); background: rgba(255,201,4,0.05); }
+    .social-btn i { color: var(--gold); font-size: 0.9rem; }
+
+    /* Form */
+    .contact-form { background: var(--dark2); border: 1px solid rgba(255,201,4,0.1); border-radius: 8px; padding: 2.5rem; }
+    .form-header { margin-bottom: 2rem; }
+    .form-header h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 0.35rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.75rem; font-family: var(--font-mono); color: var(--gray-text); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.45rem; }
+    .form-group label span { color: var(--gold); }
+    .form-control { width: 100%; background: var(--dark3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 0.75rem 1rem; color: var(--white); font-family: var(--font-main); font-size: 0.95rem; transition: var(--transition); outline: none; -webkit-appearance: none; }
+    .form-control::placeholder { color: rgba(255,255,255,0.2); }
+    .form-control:focus { border-color: var(--gold); background: rgba(255,201,4,0.03); box-shadow: 0 0 0 3px rgba(255,201,4,0.08); }
+    textarea.form-control { resize: vertical; min-height: 130px; }
+    select.form-control option { background: var(--dark2); color: var(--white); }
+    .form-submit { width: 100%; justify-content: center; padding: 0.9rem; font-size: 1rem; }
+    .form-note { font-size: 0.78rem; color: var(--gray-text); text-align: center; margin-top: 0.75rem; }
+    .form-success { display: none; text-align: center; padding: 3rem; }
+    .form-success i { font-size: 3rem; color: #00c864; margin-bottom: 1rem; }
+    .form-success h3 { color: var(--white); margin-bottom: 0.5rem; }
+
+    /* Map placeholder */
+    .map-placeholder { background: var(--dark2); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); height: 280px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem; position: relative; overflow: hidden; }
+    .map-placeholder .circuit-bg { opacity: 0.05; }
+    .map-placeholder i { font-size: 2.5rem; color: var(--gold); position: relative; z-index: 1; }
+    .map-placeholder p { position: relative; z-index: 1; text-align: center; font-size: 0.9rem; }
+    .map-placeholder strong { color: var(--white); display: block; font-size: 1rem; margin-bottom: 0.25rem; }
+
+    /* Getting here */
+    .getting-here { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+    .getting-here-card { background: var(--dark3); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+    .getting-here-card i { font-size: 1.25rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .getting-here-card h5 { color: var(--white); font-size: 0.88rem; margin-bottom: 0.25rem; }
+    .getting-here-card p { font-size: 0.8rem; }
+
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .opp-grid { grid-template-columns: 1fr; } .getting-here { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
+    @media (max-width: 500px) { .getting-here { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+      <div class="nav-logo-text">
+        <span>DT&amp;CPS Lab</span>
+        <span>University of Central Florida</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="people.html">People</a>
+      <a href="projects.html">Projects</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="circuit-bg" aria-hidden="true"></div>
+  <div class="container page-hero-content">
+    <!-- <div class="section-label">Contact</div> -->
+    <h1>Get In <span>Touch</span></h1>
+    <div class="divider"></div>
+    <p style="color:var(--gray-mid);max-width:600px;font-size:1rem;">
+      We welcome inquiries from prospective researchers, industry partners, and academic collaborators.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ OPPORTUNITIES ═══ -->
+<section class="section section--dark" aria-labelledby="opp-heading">
+  <div class="container">
+    <div data-reveal>
+      <!-- <div class="section-label">How to Connect</div> -->
+      <h2 class="section-title" id="opp-heading">Collaboration <span class="gold">Opportunities</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="opp-grid">
+      <div class="opp-card" data-reveal data-delay="50">
+        <i class="fa-solid fa-user-graduate"></i>
+        <h4>Graduate Research</h4>
+        <p>We are always looking for motivated PhD students interested in digital transformation, cyberphysical systems, and related areas. Reach out to discuss research directions.</p>
+      </div>
+      <div class="opp-card" data-reveal data-delay="100">
+        <i class="fa-solid fa-industry"></i>
+        <h4>Industry Partnership</h4>
+        <p>Join the Knights Digital Twin (KDT) Initiative. Co-develop, validate, and deploy Digital Twin solutions with cutting-edge academic research support from UCF.</p>
+      </div>
+      <div class="opp-card" data-reveal data-delay="150">
+        <i class="fa-solid fa-building-columns"></i>
+        <h4>Academic Collaboration</h4>
+        <p>We actively pursue collaborations with faculty and research groups to advance joint grants, publications, and shared research in digital transformation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT INFO + FORM ═══ -->
+<section class="section" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Info -->
+      <div data-reveal>
+        <!-- <div class="section-label">Contact Information</div> -->
+        <h2 class="section-title" id="contact-heading">Contact <span class="gold">Information</span></h2>
+        <div class="divider"></div>
+
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-value"><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="info-label">Lab Location</div>
+              <div class="info-value">Eng 2, Room 314</div>
+              <div class="info-sub">Engineering 2 Building, UCF Main Campus</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-envelopes-bulk"></i></div>
+            <div>
+              <div class="info-label">Mailing Address</div>
+              <div class="info-value">UCF — IEMS Department</div>
+              <div class="info-sub">12800 Pegasus Dr., P.O. Box 162993<br>Orlando, FL 32816-2993</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-building-columns"></i></div>
+            <div>
+              <div class="info-label">Department</div>
+              <div class="info-value"><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">Industrial Engineering &amp; Management Systems</a></div>
+              <div class="info-sub">College of Engineering &amp; Computer Science, UCF</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <!-- <div class="social-row">
+          <a href="mailto:minas.pantelidakis@ucf.edu" class="social-btn"><i class="fa-solid fa-envelope"></i> Email</a>
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" class="social-btn"><i class="fa-brands fa-google"></i> Scholar</a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" class="social-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a href="https://www.cecs.ucf.edu/faculty/minas-pantelidakis/" target="_blank" rel="noopener" class="social-btn"><i class="fa-solid fa-graduation-cap"></i> UCF Profile</a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" class="social-btn"><i class="fa-solid fa-building-columns"></i> IEMS Dept</a>
+        </div> -->
+      </div>
+
+      <!-- Form -->
+      <div data-reveal data-delay="100">
+        <div class="contact-form">
+          <div class="form-header">
+            <h3>Send a Message</h3>
+            <p>Fill out the form and we'll get back to you as soon as possible.</p>
+          </div>
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name <span>*</span></label>
+                <input type="text" id="fname" name="fname" class="form-control" placeholder="Jane" required />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name <span>*</span></label>
+                <input type="text" id="lname" name="lname" class="form-control" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address <span>*</span></label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="jane.smith@university.edu" required />
+            </div>
+            <div class="form-group">
+              <label for="affiliation">Affiliation / Organization</label>
+              <input type="text" id="affiliation" name="affiliation" class="form-control" placeholder="University / Company name" />
+            </div>
+            <div class="form-group">
+              <label for="inquiry">Inquiry Type <span>*</span></label>
+              <select id="inquiry" name="inquiry" class="form-control" required>
+                <option value="" disabled selected>Select inquiry type…</option>
+                <option value="phd">Graduate Research / PhD Inquiry</option>
+                <option value="industry">Industry Partnership / KDT</option>
+                <option value="academic">Academic Collaboration</option>
+                <option value="media">Media / Press</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject <span>*</span></label>
+              <input type="text" id="subject" name="subject" class="form-control" placeholder="Brief subject line" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message <span>*</span></label>
+              <textarea id="message" name="message" class="form-control" placeholder="Tell us about your interest, background, or collaboration idea…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+            <p class="form-note">
+              <i class="fa-solid fa-lock" style="color:var(--gold);margin-right:0.3rem;"></i>
+              Your information is kept private and never shared with third parties.
+            </p>
+          </form>
+          <div class="form-success" id="form-success">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. Dr. Pantelidakis will respond within 2 business days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LOCATION ═══ -->
+<section class="section section--dark" aria-labelledby="location-heading">
+  <div class="container">
+    <div data-reveal>
+      <div class="section-label">Location</div>
+      <h2 class="section-title" id="location-heading">Find <span class="gold">Us</span></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="map-placeholder" data-reveal data-delay="80">
+      <div class="circuit-bg" aria-hidden="true"></div>
+      <i class="fa-solid fa-location-dot"></i>
+      <p>
+        <strong>UCF Main Campus — Engineering 2 Building, Room 314</strong>
+        Department of Industrial Engineering &amp; Management Systems<br/>
+        12800 Pegasus Dr., P.O. Box 162993, Orlando, FL 32816-2993
+      </p>
+      <a href="https://maps.google.com/?q=University+of+Central+Florida+Engineering+2+Orlando+FL" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="position:relative;z-index:1;font-size:0.85rem;">
+        <i class="fa-solid fa-map"></i> Open in Google Maps
+      </a>
+    </div>
+
+    <div class="getting-here" data-reveal data-delay="120">
+      <div class="getting-here-card">
+        <i class="fa-solid fa-plane"></i>
+        <h5>Orlando International Airport</h5>
+        <p>~25 minutes from UCF Main Campus</p>
+      </div>
+      <div class="getting-here-card">
+        <i class="fa-solid fa-car"></i>
+        <h5>Parking</h5>
+        <p>Garage B and Lot B-4 adjacent to Engineering buildings</p>
+      </div>
+      <div class="getting-here-card">
+        <i class="fa-solid fa-bus"></i>
+        <h5>Lynx Bus</h5>
+        <p>Routes 15 &amp; 38 serve UCF campus directly</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="display:inline-flex;margin-bottom:0.75rem;">
+          <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+          <div class="nav-logo-text">
+            <span>DT&amp;CPS Lab</span>
+            <span>University of Central Florida</span>
+          </div>
+        </a>
+        <p>Digital Transformation &amp; Cyberphysical Systems Laboratory — Dept. of Industrial Engineering and Management Systems, UCF.</p>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="UCF IEMS"><i class="fa-solid fa-building-columns"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></li>
+          <li><a href="tel:+14078232204">407-823-2204</a></li>
+          <li><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">UCF IEMS Department</a></li>
+          <li><span style="color:var(--gray-text);font-size:0.85rem;">Eng 2, Rm 314 · Orlando, FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Transformation &amp; Cyberphysical Systems Lab, University of Central Florida. All rights reserved.</p>
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray-text);">UCF · IEMS · DR. MINAS PANTELIDAKIS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(el => {
+      if (!el.value.trim()) { el.style.borderColor = '#ff4444'; valid = false; }
+      else el.style.borderColor = '';
+    });
+    if (!valid) return;
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    const subj = encodeURIComponent(document.getElementById('subject').value);
+    const body = encodeURIComponent(document.getElementById('message').value);
+    setTimeout(() => { window.location.href = `mailto:minas.pantelidakis@ucf.edu?subject=${subj}&body=${body}`; }, 1200);
+  });
+</script>
+</body>
+</html>
