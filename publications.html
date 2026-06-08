@@ -33,24 +33,6 @@
     .scholar-banner p { font-size: 0.9rem; color: var(--gray-mid); margin: 0; }
     .scholar-banner strong { color: var(--white); }
 
-    /* Filter bar */
-    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
-    .filter-btn {
-      padding: 0.45rem 1rem;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 3px;
-      color: var(--gray-text);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .filter-btn:hover { border-color: rgba(255,201,4,0.4); color: var(--gold); }
-    .filter-btn.active { background: rgba(255,201,4,0.1); border-color: var(--gold); color: var(--gold); }
-
     /* Year group */
     .pub-year-group { margin-bottom: 3rem; }
     .pub-year-group.hidden { display: none; }
@@ -77,27 +59,16 @@
     .pub-entry.hidden { display: none; }
 
     .pub-meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-    .pub-type { font-size: 0.68rem; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 2px; white-space: nowrap; }
-    .type-journal { background: rgba(77,184,255,0.1); color: #4db8ff; border: 1px solid rgba(77,184,255,0.25); }
-    .type-conf    { background: rgba(180,138,255,0.1); color: #b48aff; border: 1px solid rgba(180,138,255,0.25); }
-    .type-diss    { background: rgba(255,201,4,0.1);  color: var(--gold); border: 1px solid rgba(255,201,4,0.25); }
     .pub-venue { font-size: 0.82rem; color: var(--gray-text); font-style: italic; }
 
     .pub-title { color: var(--white); font-size: 0.97rem; font-weight: 600; margin-bottom: 0.35rem; line-height: 1.45; }
     .pub-authors { font-size: 0.84rem; color: var(--gray-text); margin-bottom: 0.6rem; }
     .pub-authors strong { color: var(--gold); }
     .pub-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .pub-btn { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-family: var(--font-mono); padding: 0.2rem 0.6rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; color: var(--gray-text); transition: var(--transition); cursor: pointer; background: none; }
+    .pub-btn { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-family: var(--font-mono); padding: 0.2rem 0.6rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; color: var(--gray-text); transition: var(--transition); cursor: pointer; background: none; text-decoration: none; }
     .pub-btn:hover { border-color: rgba(255,201,4,0.3); color: var(--gold); }
     .pub-btn i { font-size: 0.7rem; color: var(--gold); }
 
-    /* Stats bar */
-    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
-    .stat-box { background: var(--dark2); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
-    .stat-box-num { font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
-    .stat-box-label { font-size: 0.72rem; color: var(--gray-text); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.35rem; }
-
-    @media (max-width: 700px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -140,30 +111,6 @@
 <section class="section" aria-labelledby="pub-heading">
   <div class="container">
 
-    <!-- Stats -->
-    <div class="stats-bar" data-reveal>
-      <div class="stat-box"><div class="stat-box-num">12</div><div class="stat-box-label">Total Papers</div></div>
-      <div class="stat-box"><div class="stat-box-num">8</div><div class="stat-box-label">Journal Articles</div></div>
-      <div class="stat-box"><div class="stat-box-num">4</div><div class="stat-box-label">Conference Papers</div></div>
-      <div class="stat-box"><div class="stat-box-num">2022–2024</div><div class="stat-box-label">Publication Range</div></div>
-    </div>
-
-    <!-- Scholar banner -->
-    <!-- <div class="scholar-banner" data-reveal data-delay="60">
-      <p><strong>Full publication list</strong> including citation metrics available on Google Scholar.</p>
-      <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.82rem;padding:0.5rem 1rem;">
-        <i class="fa-brands fa-google"></i> Google Scholar Profile
-      </a>
-    </div> -->
-
-    <!-- Filter bar -->
-    <div class="filter-bar" data-reveal data-delay="80">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="journal">Journal Articles</button>
-      <button class="filter-btn" data-filter="conf">Conference Papers</button>
-      <button class="filter-btn" data-filter="diss">Dissertation</button>
-    </div>
-
     <div id="pub-heading" style="display:none">Publications</div>
 
     <!-- ═══ 2025 ═══ -->
@@ -173,14 +120,14 @@
         <div class="pub-year-line"></div>
       </div>
 
-      <div class="pub-entry" data-type="diss">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-diss">Dissertation</span>
-          <span class="pub-venue">Auburn University</span>
+          <span class="pub-venue">PhD Dissertation, Auburn University</span>
         </div>
         <div class="pub-title">A Generic Digital Twin Ecosystem for Computer Numerical Control Manufacturing Processes</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong> — Advisor: Dr. Konstantinos Mykoniatis</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://etd.auburn.edu/handle/10415/9852" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M. (2025). A Generic Digital Twin Ecosystem for Computer Numerical Control Manufacturing Processes. PhD Dissertation, Auburn University.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
@@ -193,62 +140,62 @@
         <div class="pub-year-line"></div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Manufacturing Letters, vol. 41, pp. 1507–1514</span>
         </div>
         <div class="pub-title">Empowering decentralized production: A distributed manufacturing system for additive manufacturing processes</div>
         <div class="pub-authors">Katsigiannis, M., Evans, M., Osho, J., <strong>Pantelidakis, M.</strong>, Bitencourt, J., and Mykoniatis, K.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.mfglet.2024.09.177" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Katsigiannis, M., Evans, M., Osho, J., Pantelidakis, M., Bitencourt, J., and Mykoniatis, K. (2024). Empowering decentralized production: A distributed manufacturing system for additive manufacturing processes. Manufacturing Letters, 41, 1507–1514.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">International Journal of Lean Six Sigma, vol. 15, no. 2, pp. 220–246</span>
         </div>
         <div class="pub-title">Assessing the transition from mass production to lean manufacturing using a hybrid simulation model of a LEGO® automotive assembly line</div>
         <div class="pub-authors">Katsigiannis, M., <strong>Pantelidakis, M.</strong>, and Mykoniatis, K.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1108/ijlss-07-2022-0165" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Katsigiannis, M., Pantelidakis, M., and Mykoniatis, K. (2024). Assessing the transition from mass production to lean manufacturing using a hybrid simulation model of a LEGO® automotive assembly line. International Journal of Lean Six Sigma, 15(2), 220–246.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Journal of Manufacturing Systems, vol. 74, pp. 1057–1066</span>
         </div>
         <div class="pub-title">Extending the digital twin ecosystem: A real-time digital twin of a LinuxCNC-controlled subtractive manufacturing machine</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong> and Mykoniatis, K.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.jmsy.2024.05.012" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M. and Mykoniatis, K. (2024). Extending the digital twin ecosystem: A real-time digital twin of a LinuxCNC-controlled subtractive manufacturing machine. Journal of Manufacturing Systems, 74, 1057–1066.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="conf">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-conf">Conference Paper</span>
           <span class="pub-venue">2024 IISE Annual Conference and Expo, IISE</span>
         </div>
         <div class="pub-title">To security and beyond: Cyber-physical security for manufacturing utilizing a digital twin ecosystem</div>
         <div class="pub-authors">Evans, M., <strong>Pantelidakis, M.</strong>, Osho, J., McGahey, K., Mykoniatis, K., and Purdy, G.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.21872/2024iise_7948" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Evans, M., Pantelidakis, M., Osho, J., McGahey, K., Mykoniatis, K., and Purdy, G. (2024). To security and beyond: Cyber-physical security for manufacturing utilizing a digital twin ecosystem. 2024 IISE Annual Conference and Expo.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="conf">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-conf">Conference Paper</span>
           <span class="pub-venue">2024 Winter Simulation Conference (WSC), IEEE, pp. 1599–1610</span>
         </div>
         <div class="pub-title">Simulation aspects of a generic digital twin ecosystem for computer numerical control manufacturing processes</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong> and Mykoniatis, K.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1109/wsc63780.2024.10838983" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M. and Mykoniatis, K. (2024). Simulation aspects of a generic digital twin ecosystem for computer numerical control manufacturing processes. 2024 Winter Simulation Conference (WSC), IEEE, pp. 1599–1610.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
@@ -261,38 +208,38 @@
         <div class="pub-year-line"></div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Manufacturing Letters, vol. 35, pp. 933–939</span>
         </div>
         <div class="pub-title">Current monitoring for a fused filament fabrication additive manufacturing process using an internet of things system</div>
         <div class="pub-authors">Katsigiannis, M., <strong>Pantelidakis, M.</strong>, Mykoniatis, K., and Purdy, G.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.mfglet.2023.08.013" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Katsigiannis, M., Pantelidakis, M., Mykoniatis, K., and Purdy, G. (2023). Current monitoring for a fused filament fabrication additive manufacturing process using an internet of things system. Manufacturing Letters, 35, 933–939.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="conf">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-conf">Conference Paper</span>
           <span class="pub-venue">2nd AAAI Workshop on AI for Agriculture and Food Systems</span>
         </div>
         <div class="pub-title">Tomato-plant sunlit-leaf segmentation using convolutional neural networks: Supporting crop water stress index measurements</div>
         <div class="pub-authors">Hampton, J., Panagopoulos, A.A., <strong>Pantelidakis, M.</strong>, et al.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://openreview.net/pdf?id=_GJvOvRvjiC" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Hampton, J., Panagopoulos, A.A., Pantelidakis, M., et al. (2023). Tomato-plant sunlit-leaf segmentation using convolutional neural networks. 2nd AAAI Workshop on AI for Agriculture and Food Systems.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="conf">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-conf">Conference Paper</span>
           <span class="pub-venue">2023 3rd ICECCME, IEEE, pp. 1–6</span>
         </div>
         <div class="pub-title">Condition monitoring for overall equipment effectiveness using internet of things, edge computing, and extended reality</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong>, Katsigiannis, M., Mykoniatis, K., Purdy, G., and Liu, J.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1109/iceccme57830.2023.10252424" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M., Katsigiannis, M., Mykoniatis, K., Purdy, G., and Liu, J. (2023). Condition monitoring for overall equipment effectiveness using internet of things, edge computing, and extended reality. 2023 3rd ICECCME, IEEE, pp. 1–6.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
@@ -305,50 +252,50 @@
         <div class="pub-year-line"></div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Manufacturing Letters, vol. 31, pp. 20–23</span>
         </div>
         <div class="pub-title">Digital twins: Representation, replication, reality, and relational (4Rs)</div>
         <div class="pub-authors">Hyre, A., Harris, G., Osho, J., <strong>Pantelidakis, M.</strong>, Mykoniatis, K., and Liu, J.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.mfglet.2021.12.004" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Hyre, A., Harris, G., Osho, J., Pantelidakis, M., Mykoniatis, K., and Liu, J. (2022). Digital twins: Representation, replication, reality, and relational (4Rs). Manufacturing Letters, 31, 20–23.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">The International Journal of Advanced Manufacturing Technology, vol. 120, no. 9, pp. 6547–6563</span>
         </div>
         <div class="pub-title">A digital twin ecosystem for additive manufacturing using a real-time development platform</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong>, Mykoniatis, K., Liu, J., and Harris, G.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1007/s00170-022-09164-6" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M., Mykoniatis, K., Liu, J., and Harris, G. (2022). A digital twin ecosystem for additive manufacturing using a real-time development platform. The International Journal of Advanced Manufacturing Technology, 120(9), 6547–6563.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Expert Systems with Applications, vol. 209, p. 118326</span>
         </div>
         <div class="pub-title">Identifying sunlit leaves using convolutional neural networks: An expert system for measuring the crop water stress index of pistachio trees</div>
         <div class="pub-authors"><strong>Pantelidakis, M.</strong>, Panagopoulos, A.A., Mykoniatis, K., et al.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.eswa.2022.118326" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Pantelidakis, M., Panagopoulos, A.A., Mykoniatis, K., et al. (2022). Identifying sunlit leaves using convolutional neural networks: An expert system for measuring the crop water stress index of pistachio trees. Expert Systems with Applications, 209, 118326.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
 
-      <div class="pub-entry" data-type="journal">
+      <div class="pub-entry">
         <div class="pub-meta">
-          <span class="pub-type type-journal">Journal Article</span>
           <span class="pub-venue">Journal of Manufacturing Systems, vol. 63, pp. 370–380</span>
         </div>
         <div class="pub-title">Four Rs framework for the development of a digital twin: The implementation of representation with a FDM manufacturing machine</div>
         <div class="pub-authors">Osho, J., Hyre, A., <strong>Pantelidakis, M.</strong>, et al.</div>
         <div class="pub-actions">
+          <a class="pub-btn" href="https://doi.org/10.1016/j.jmsy.2022.04.014" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> View Paper</a>
           <button class="pub-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText('Osho, J., Hyre, A., Pantelidakis, M., et al. (2022). Four Rs framework for the development of a digital twin: The implementation of representation with a FDM manufacturing machine. Journal of Manufacturing Systems, 63, 370–380.')"><i class="fa-solid fa-quote-left"></i> Cite</button>
         </div>
       </div>
@@ -357,7 +304,7 @@
     <!-- note -->
     <p style="font-size:0.82rem;color:var(--gray-text);margin-top:2rem;" data-reveal>
       <i class="fa-solid fa-circle-info" style="color:var(--gold);margin-right:0.4rem;"></i>
-      Lab members' names are shown in <strong style="color:var(--gold);">gold</strong>. Citation copy copies plain-text format to clipboard. For full metrics visit
+      Lab members' names are shown in <strong style="color:var(--gold);">gold</strong>. The full list with citation metrics is available on
       <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
     </p>
   </div>
@@ -411,33 +358,9 @@
 
 <script src="script.js"></script>
 <script>
-  /* Publication filter by type */
+  /* Cite button feedback (only the copy buttons, not the View Paper links) */
   document.addEventListener('DOMContentLoaded', () => {
-    const btns    = document.querySelectorAll('.filter-btn');
-    const entries = document.querySelectorAll('.pub-entry');
-    const groups  = document.querySelectorAll('.pub-year-group');
-
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-
-        entries.forEach(e => {
-          const match = f === 'all' || e.dataset.type === f;
-          e.classList.toggle('hidden', !match);
-        });
-
-        // Hide year group if all its entries are hidden
-        groups.forEach(g => {
-          const visible = [...g.querySelectorAll('.pub-entry')].some(e => !e.classList.contains('hidden'));
-          g.classList.toggle('hidden', !visible);
-        });
-      });
-    });
-
-    /* Cite button feedback */
-    document.querySelectorAll('.pub-btn').forEach(btn => {
+    document.querySelectorAll('button.pub-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const orig = btn.innerHTML;
         btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
