@@ -8,3 +8,6 @@ desktop.ini
 # Internal working docs — not part of the published site
 LabInfo.md
 Lab_Website_Requirements.md
+
+# Local-only optimization roadmap (kept uncommitted by request)
+ROADMAP.md
