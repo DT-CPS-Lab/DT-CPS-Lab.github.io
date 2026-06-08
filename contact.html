@@ -71,6 +71,14 @@
     .map-placeholder p { position: relative; z-index: 1; text-align: center; font-size: 0.9rem; }
     .map-placeholder strong { color: var(--white); display: block; font-size: 1rem; margin-bottom: 0.25rem; }
 
+    /* Embedded map */
+    .map-embed { border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,201,4,0.12); line-height: 0; }
+    .map-embed iframe { display: block; width: 100%; height: 400px; }
+    .map-actions { text-align: center; margin-top: 1.25rem; }
+
+    /* Form error */
+    .form-error { display: none; color: #ff5555; font-size: 0.82rem; text-align: center; margin-top: 0.75rem; }
+
     /* Getting here */
     .getting-here { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
     .getting-here-card { background: var(--dark3); border: 1px solid rgba(255,201,4,0.08); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
@@ -209,6 +217,9 @@
             <p>Fill out the form and we'll get back to you as soon as possible.</p>
           </div>
           <form id="contact-form" novalidate>
+            <input type="hidden" name="access_key" value="8b9b1e34-7186-4cd6-a300-5d6497d4b69a" />
+            <input type="hidden" name="from_name" value="DT&CPS Lab Website Contact Form" />
+            <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off" />
             <div class="form-row">
               <div class="form-group">
                 <label for="fname">First Name <span>*</span></label>
@@ -253,6 +264,7 @@
               <i class="fa-solid fa-lock" style="color:var(--gold);margin-right:0.3rem;"></i>
               Your information is kept private and never shared with third parties.
             </p>
+            <p class="form-error" id="form-error" role="alert"></p>
           </form>
           <div class="form-success" id="form-success">
             <i class="fa-solid fa-circle-check"></i>
@@ -274,15 +286,15 @@
       <div class="divider"></div>
     </div>
 
-    <div class="map-placeholder" data-reveal data-delay="80">
-      <div class="circuit-bg" aria-hidden="true"></div>
-      <i class="fa-solid fa-location-dot"></i>
-      <p>
-        <strong>UCF Main Campus — Engineering 2 Building, Room 314</strong>
-        Department of Industrial Engineering &amp; Management Systems<br/>
-        12800 Pegasus Dr., P.O. Box 162993, Orlando, FL 32816-2993
-      </p>
-      <a href="https://maps.google.com/?q=University+of+Central+Florida+Engineering+2+Orlando+FL" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="position:relative;z-index:1;font-size:0.85rem;">
+    <div class="map-embed" data-reveal data-delay="80">
+      <iframe
+        title="UCF Engineering 2 Building — DT&amp;CPS Lab location"
+        src="https://www.google.com/maps?q=University+of+Central+Florida+Engineering+II+Building,+Orlando,+FL+32816&output=embed"
+        width="100%" height="400" style="border:0;" allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="map-actions" data-reveal data-delay="120">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=University+of+Central+Florida+Engineering+II+Building" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size:0.85rem;">
         <i class="fa-solid fa-map"></i> Open in Google Maps
       </a>
     </div>
@@ -355,20 +367,45 @@
 
 <script src="script.js"></script>
 <script>
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const form = this;
+    const errorEl = document.getElementById('form-error');
+    const btn = form.querySelector('.form-submit');
+
+    // Validate required fields
     let valid = true;
     form.querySelectorAll('[required]').forEach(el => {
       if (!el.value.trim()) { el.style.borderColor = '#ff4444'; valid = false; }
       else el.style.borderColor = '';
     });
     if (!valid) return;
-    form.style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    const subj = encodeURIComponent(document.getElementById('subject').value);
-    const body = encodeURIComponent(document.getElementById('message').value);
-    setTimeout(() => { window.location.href = `mailto:minas.pantelidakis@ucf.edu?subject=${subj}&body=${body}`; }, 1200);
+
+    // Sending state
+    errorEl.style.display = 'none';
+    const originalBtn = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      errorEl.textContent = 'Sorry, something went wrong sending your message. Please try again, or email minas.pantelidakis@ucf.edu directly.';
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = originalBtn;
+    }
   });
 </script>
 </body>
