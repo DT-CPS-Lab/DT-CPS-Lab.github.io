@@ -203,12 +203,15 @@ p  { color: var(--gray-mid); line-height: 1.75; }
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 4px;
+  padding: 7px;
+  background: var(--gold);
+  border: none;
+  border-radius: 5px;
 }
 .nav-toggle span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--gold);
+  background: var(--black);
   border-radius: 2px;
   transition: var(--transition);
 }

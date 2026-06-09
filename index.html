@@ -137,7 +137,11 @@
     .cta-section p { margin: 0 auto 2rem; max-width: 520px; }
     .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
 
-    @media (max-width: 768px) { .hero-lab-title { font-size: clamp(0.9rem, 4vw, 1.2rem); } }
+    @media (max-width: 768px) {
+      .hero-lab-title { font-size: clamp(0.9rem, 4vw, 1.2rem); }
+      .hero { align-items: flex-start; padding-top: 96px; padding-bottom: 48px; }
+      .hero-logo-v4 { width: 210px; }
+    }
     @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
