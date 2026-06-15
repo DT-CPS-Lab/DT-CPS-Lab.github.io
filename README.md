@@ -10,7 +10,7 @@ PI: Dr. Minas Pantelidakis.
 
 Pure static **HTML / CSS / JavaScript** — no framework and no build step.
 Pages: `index.html` (About), `people.html`, `projects.html`, `publications.html`,
-`research.html`, `contact.html`. Shared styles in `styles.css`, shared behavior in
+`contact.html`. Shared styles in `styles.css`, shared behavior in
 `script.js`. Images and media live in `media/` and `logo/`.
 
 ## Editing & deploying
