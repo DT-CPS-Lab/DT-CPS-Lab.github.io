@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open PhD Position — DT&amp;CPS Lab UCF</title>
+  <meta name="description" content="Fully funded PhD position (tuition covered + competitive stipend) in the Digital Transformation &amp; Cyber-Physical Systems Laboratory at the University of Central Florida." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DT&amp;CPS Lab — UCF" />
+  <meta property="og:title" content="Open PhD Position — DT&amp;CPS Lab UCF" />
+  <meta property="og:description" content="Fully funded PhD position (tuition covered + competitive stipend) in the DT&amp;CPS Laboratory at the University of Central Florida." />
+  <meta property="og:url" content="https://dt-cps-lab.github.io/open-position.html" />
+  <meta property="og:image" content="https://dt-cps-lab.github.io/logo/v4.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Open PhD Position — DT&amp;CPS Lab UCF" />
+  <meta name="twitter:description" content="Fully funded PhD position (tuition covered + competitive stipend) in the DT&amp;CPS Laboratory at the University of Central Florida." />
+  <meta name="twitter:image" content="https://dt-cps-lab.github.io/logo/v4.jpg" />
+  <link rel="icon" href="logo/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .nav.scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* ── Highlighted funding banner ── */
+    .position-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.2);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .position-banner::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+    .position-banner .banner-icon { font-size: 2.5rem; color: var(--gold); flex-shrink: 0; }
+    .position-banner h3 { color: var(--white); margin-bottom: 0.4rem; }
+    .position-banner p { font-size: 0.95rem; margin: 0; }
+
+    /* ── Highlight stat pills ── */
+    .fund-pills { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+    .fund-pill {
+      flex: 1 1 220px;
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.12);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 1.5rem 1.75rem;
+    }
+    .fund-pill i { font-size: 1.5rem; color: var(--gold); margin-bottom: 0.6rem; }
+    .fund-pill h4 { color: var(--white); font-size: 1rem; margin-bottom: 0.35rem; }
+    .fund-pill p { font-size: 0.86rem; margin: 0; }
+
+    /* ── Card grid (What you'll work on / What we offer) ── */
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1rem; }
+    .info-card {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.07);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: var(--transition);
+    }
+    .info-card:hover { border-color: rgba(255,201,4,0.2); }
+    .info-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,201,4,0.08);
+      border: 1px solid rgba(255,201,4,0.25);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: var(--gold); flex-shrink: 0;
+    }
+    .info-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 0.4rem; }
+    .info-card p { font-size: 0.875rem; }
+
+    /* ── Who we're looking for ── */
+    .looking-list { list-style: none; padding: 0; margin: 1rem 0 1.75rem; }
+    .looking-list li {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      font-size: 0.95rem; color: var(--gray-mid); line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .looking-list li i { color: var(--gold); margin-top: 0.3rem; flex-shrink: 0; }
+
+    /* ── Apply callout ── */
+    .join-callout {
+      background: var(--dark2);
+      border: 1px solid rgba(255,201,4,0.1);
+      border-radius: 8px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .join-callout > i { font-size: 2.5rem; color: var(--gold); flex-shrink: 0; }
+    .join-callout h3 { color: var(--white); margin-bottom: 0.5rem; }
+    .join-callout p { font-size: 0.9rem; margin-bottom: 1rem; }
+
+    @media (max-width: 900px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .join-callout { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="container">
+    <a class="nav-logo" href="index.html" aria-label="DT&CPS Lab home">
+      <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+      <div class="nav-logo-text">
+        <span>DT&amp;CPS Lab</span>
+        <span>University of Central Florida</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="people.html">People</a>
+      <a href="projects.html">Projects</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="circuit-bg" aria-hidden="true"></div>
+  <div class="container page-hero-content">
+    <h1>Open <span>PhD Position</span></h1>
+    <div class="divider"></div>
+    <p style="color:var(--gray-mid);max-width:640px;font-size:1rem;">
+      A fully funded PhD position in the Digital Transformation &amp; Cyber-Physical Systems Laboratory at the University of Central Florida — tuition fully covered and a competitive stipend.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ OVERVIEW ═══ -->
+<section class="section" aria-labelledby="overview-heading">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="overview-heading">The <span class="gold">Opportunity</span></h2>
+      <div class="divider"></div>
+      <p style="max-width:760px;font-size:1.02rem;color:var(--gray-mid);line-height:1.85;">
+        The DT&amp;CPS Lab is seeking a motivated PhD student to join our team in the Department of Industrial Engineering and Management Systems (IEMS) at UCF. This is a <strong style="color:var(--white);">fully funded doctoral position</strong> supporting research at the intersection of Digital Twins, real-time simulation, and advanced manufacturing. You will work closely with the PI and an interdisciplinary team, contribute to high-impact publications, and help build systems that connect the physical and digital worlds.
+      </p>
+    </div>
+
+    <div class="fund-pills" data-reveal data-delay="80">
+      <div class="fund-pill">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h4>Tuition Fully Covered</h4>
+        <p>Full tuition coverage for the duration of the funded PhD assistantship.</p>
+      </div>
+      <div class="fund-pill">
+        <i class="fa-solid fa-sack-dollar"></i>
+        <h4>Competitive Stipend</h4>
+        <p>A competitive annual stipend to support your studies and research.</p>
+      </div>
+      <div class="fund-pill">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h4>Flexible Start</h4>
+        <p>Position open for the next available term; applications reviewed on a rolling basis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT YOU'LL WORK ON ═══ -->
+<section class="section section--dark" aria-labelledby="work-heading">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="work-heading">What You'll <span class="gold">Work On</span></h2>
+      <div class="divider"></div>
+      <p style="max-width:760px;font-size:0.98rem;color:var(--gray-mid);line-height:1.8;">
+        Our research bridges physical systems and their digital counterparts. The exact focus is shaped to your strengths and interests, drawing on themes such as:
+      </p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card" data-reveal data-delay="60">
+        <div class="info-icon"><i class="fa-solid fa-cubes"></i></div>
+        <div>
+          <h4>Digital Twins</h4>
+          <p>High-fidelity, continuously synchronized virtual replicas of physical assets and processes.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="120">
+        <div class="info-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div>
+          <h4>Real-Time Modeling &amp; Simulation</h4>
+          <p>Interactive, high-performance simulation of dynamic systems and processes.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="180">
+        <div class="info-icon"><i class="fa-solid fa-industry"></i></div>
+        <div>
+          <h4>Advanced &amp; Digital Manufacturing</h4>
+          <p>Smart manufacturing processes, digital manufacturing workflows, and Industry 4.0 integration.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="240">
+        <div class="info-icon"><i class="fa-solid fa-cube"></i></div>
+        <div>
+          <h4>Computer Graphics &amp; Interactive 3D</h4>
+          <p>Geometric modeling, 3D visualization, and GPU-accelerated interactive environments.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="300">
+        <div class="info-icon"><i class="fa-solid fa-network-wired"></i></div>
+        <div>
+          <h4>Internet of Things</h4>
+          <p>Sensor-driven, connected cyber-physical systems from edge devices to the cloud.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="360">
+        <div class="info-icon"><i class="fa-solid fa-brain"></i></div>
+        <div>
+          <h4>AI-Driven Systems</h4>
+          <p>Machine learning and data-driven methods that make cyber-physical systems intelligent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO WE'RE LOOKING FOR ═══ -->
+<section class="section" aria-labelledby="who-heading">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="who-heading">Who We're <span class="gold">Looking For</span></h2>
+      <div class="divider"></div>
+      <p style="max-width:760px;font-size:0.98rem;color:var(--gray-mid);line-height:1.8;">
+        We welcome candidates with a background in computer science, computer engineering, or a related field. Curiosity, strong programming skills, and a drive to build real systems matter more to us than any rigid checklist.
+      </p>
+      <ul class="looking-list">
+        <li><i class="fa-solid fa-check"></i><span>Solid programming skills and a genuine interest in building software.</span></li>
+        <li><i class="fa-solid fa-check"></i><span>Experience or interest in one or more of: computer graphics, GPU programming, real-time simulation, or digital twins.</span></li>
+        <li><i class="fa-solid fa-check"></i><span>Curiosity about cybersecurity, the Internet of Things, and AI-driven systems is a plus.</span></li>
+        <li><i class="fa-solid fa-check"></i><span>Self-motivated, collaborative, and excited to work across disciplines.</span></li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+        <span class="tag tag-gold">Programming</span>
+        <span class="tag tag-gold">Computer Graphics</span>
+        <span class="tag tag-gold">GPU Programming</span>
+        <span class="tag tag-gold">Simulation</span>
+        <span class="tag tag-gold">Digital Twins</span>
+        <span class="tag tag-gray">Cybersecurity</span>
+        <span class="tag tag-gray">Internet of Things</span>
+        <span class="tag tag-gray">Artificial Intelligence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT WE OFFER ═══ -->
+<section class="section section--dark" aria-labelledby="offer-heading">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title" id="offer-heading">What We <span class="gold">Offer</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card" data-reveal data-delay="60">
+        <div class="info-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <h4>Full Funding</h4>
+          <p>Tuition fully covered plus a competitive stipend, so you can focus on your research.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="120">
+        <div class="info-icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <div>
+          <h4>Close Mentorship</h4>
+          <p>Hands-on advising and support in developing your research, writing, and career.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="180">
+        <div class="info-icon"><i class="fa-solid fa-people-group"></i></div>
+        <div>
+          <h4>Interdisciplinary Team</h4>
+          <p>Collaborate across industrial engineering, computer science, and cyber-physical systems.</p>
+        </div>
+      </div>
+      <div class="info-card" data-reveal data-delay="240">
+        <div class="info-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div>
+          <h4>Impactful Research</h4>
+          <p>Industry-connected projects and opportunities to publish in leading venues.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW TO APPLY ═══ -->
+<section class="section" aria-label="How to apply">
+  <div class="container">
+    <div data-reveal>
+      <h2 class="section-title">How to <span class="gold">Apply</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="join-callout" data-reveal data-delay="80">
+      <i class="fa-solid fa-paper-plane"></i>
+      <div>
+        <h3>Ready to Apply?</h3>
+        <p>Email Dr. Minas Pantelidakis with your CV, transcripts, and a short statement of your research interests. Applications are reviewed on a rolling basis until the position is filled — we encourage you to reach out early.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+          <a href="mailto:minas.pantelidakis@ucf.edu?subject=Open%20PhD%20Position%20%E2%80%94%20DT%26CPS%20Lab" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Email Dr. Pantelidakis</a>
+          <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-address-card"></i> Contact Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="display:inline-flex;margin-bottom:0.75rem;">
+          <img src="logo/v4.jpg" alt="DT&CPS Lab Logo" class="nav-logo-img" />
+          <div class="nav-logo-text">
+            <span>DT&amp;CPS Lab</span>
+            <span>University of Central Florida</span>
+          </div>
+        </a>
+        <p>Digital Transformation &amp; Cyber-Physical Systems Laboratory — Dept. of Industrial Engineering and Management Systems, UCF.</p>
+        <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+          <a href="https://scholar.google.com/citations?user=hL-bifwAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="Google Scholar"><i class="fa-brands fa-google"></i></a>
+          <a href="https://linkedin.com/in/minas-pantelidakis-441b5012a/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://iems.ucf.edu/" target="_blank" rel="noopener" style="color:var(--gray-text);font-size:1.1rem;" title="UCF IEMS"><i class="fa-solid fa-building-columns"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:minas.pantelidakis@ucf.edu">minas.pantelidakis@ucf.edu</a></li>
+          <li><a href="https://www.cecs.ucf.edu/faculty/minas-pantelidakis/" target="_blank" rel="noopener">UCF Faculty Profile</a></li>
+          <li><a href="https://iems.ucf.edu/" target="_blank" rel="noopener">UCF IEMS Department</a></li>
+          <li><span style="color:var(--gray-text);font-size:0.85rem;">Eng 2, Rm 314 · Orlando, FL</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digital Transformation &amp; Cyber-Physical Systems Lab, University of Central Florida. All rights reserved.</p>
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--gray-text);">UCF · IEMS · DR. MINAS PANTELIDAKIS</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
