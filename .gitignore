@@ -6,6 +6,8 @@ desktop.ini
 *.swp
 
 # Internal working docs — not part of the published site
+LabMembers.md
+LabProjects.md
 LabInfo.md
 Lab_Website_Requirements.md
 
