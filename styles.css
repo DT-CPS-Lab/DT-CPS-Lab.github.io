@@ -143,13 +143,6 @@ p  { color: var(--gray-mid); line-height: 1.75; }
   gap: 0.75rem;
   text-decoration: none;
 }
-.nav-logo-img {
-  height: 46px;
-  width: auto;
-  border-radius: 4px;
-  object-fit: contain;
-  display: block;
-}
 .nav-logo-text {
   display: flex;
   flex-direction: column;
