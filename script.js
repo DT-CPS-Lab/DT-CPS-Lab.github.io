@@ -51,11 +51,23 @@ function initParticles(canvasId) {
   let particles = [];
   const GOLD = 'rgba(255, 199, 44,';
 
+  /* Keep the canvas matched to its box. When the size changes, rescale existing
+     particle positions so they stay spread across the whole area instead of
+     staying bunched in the old (smaller) region after a window enlarge or rotate. */
   function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    if (!w || !h || (w === canvas.width && h === canvas.height)) return;
+    const sx = canvas.width  ? w / canvas.width  : 1;
+    const sy = canvas.height ? h / canvas.height : 1;
+    canvas.width  = w;
+    canvas.height = h;
+    particles.forEach(p => { p.x *= sx; p.y *= sy; });
   }
-  window.addEventListener('resize', resize, { passive: true });
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(canvas);   /* also catches layout-only changes */
+  } else {
+    window.addEventListener('resize', resize, { passive: true });
+  }
   resize();
 
   function Particle() {
