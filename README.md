@@ -1,7 +1,5 @@
 <img src="logo/banner_og.jpg" alt="DT&CPS Lab banner" width="100%" />
 
-# Digital Transformation & Cyberphysical Systems Lab — Website
-
 The public website for the **DT&CPS Lab** at the University of Central Florida (UCF),
 Department of Industrial Engineering and Management Systems (IEMS).
 
