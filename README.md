@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="logo/v4_transparent.png" alt="DT&CPS Lab logo" width="220" />
-</p>
+<img src="logo/banner_og.jpg" alt="DT&CPS Lab banner" width="100%" />
 
 # Digital Transformation & Cyberphysical Systems Lab — Website
 
